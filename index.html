@@ -204,7 +204,6 @@
         }
       }
 
-      /* Desktop Grid System */
       .desktop-split-layout {
         display: flex;
         flex-direction: column;
@@ -799,14 +798,27 @@
         padding-left: 44px;
       }
 
+      /* Real Action Bar: Views, Likes, Reply */
       .comment-actions-bar {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 14px;
         margin-top: 12px;
         padding-left: 44px;
         padding-top: 10px;
         border-top: 1px solid #F1F5F9;
+        flex-wrap: wrap;
+      }
+
+      .comment-stat-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace;
+        padding: 4px 6px;
       }
 
       .action-link-btn {
@@ -848,7 +860,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        animation: fadeIn 0.2s ease;
+        animation: fadeIn 0.15s ease;
       }
 
       @keyframes fadeIn {
@@ -976,8 +988,10 @@
             <div class="header-meta">
               <span>লাইভ সেশন পোল</span>
               <span class="meta-sep">/</span>
+              <span><span id="header-total-views" style="font-weight: 700; color: var(--text-primary);">0</span> ভিউ</span>
+              <span class="meta-sep">/</span>
               <span id="header-total-votes" style="font-weight: 700; color: var(--text-primary);">0</span>
-              <span>জন অংশগ্রহণ করেছেন</span>
+              <span>ভোট দিয়েছেন</span>
             </div>
           </div>
         </div>
@@ -1010,7 +1024,7 @@
         <div class="desktop-split-layout">
           <!-- LEFT COLUMN: Overview & Booking Form (Sticky on PC, Native Stack on Mobile) -->
           <aside class="sidebar-column">
-            <!-- Overview Card -->
+            <!-- Overview Card with Real Metrics -->
             <div class="app-card">
               <span class="section-kicker">Autonomous Systems Masterclass</span>
               <h1 class="card-heading">Autonomous AI Agent Setup & 24/7 AI Support Systems Voting</h1>
@@ -1018,15 +1032,19 @@
                 অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।
               </p>
 
-              <!-- Real-time Unboxed Stats Strip -->
+              <!-- 100% Real Stats Strip -->
               <div class="stats-strip">
                 <div class="stat-item">
                   <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট ভোট</span>
                   <strong id="summary-total-votes">0</strong>
                 </div>
+                <div class="stat-item" style="text-align: center;">
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট ভিউ</span>
+                  <strong id="summary-total-views">0</strong>
+                </div>
                 <div class="stat-item" style="text-align: right;">
-                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">টপিক সংখ্যা</span>
-                  <strong>৮টি</strong>
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট লাইক</span>
+                  <strong id="summary-total-likes">0</strong>
                 </div>
               </div>
 
@@ -1071,6 +1089,14 @@
                     <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                   </svg>
                   <span>ভোট সাবমিট করুন</span>
+                </button>
+
+                <!-- Real Poll Like Action Button -->
+                <button id="btn-like-poll" class="btn-sub-action" onclick="togglePollLike()">
+                  <svg id="poll-like-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                  <span id="poll-like-text">পোল লাইক করুন (<span id="poll-likes-badge">0</span>)</span>
                 </button>
 
                 <button id="btn-toggle-results" class="btn-sub-action" onclick="toggleResultsPreview()">
@@ -1179,16 +1205,20 @@
               </div>
             </div>
 
-            <!-- Stats Strip -->
+            <!-- Real Stats Strip -->
             <div class="app-card">
               <div class="stats-strip" style="margin-top: 0; padding-top: 0; border-top: none;">
                 <div class="stat-item">
                   <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট আলোচনা</span>
                   <strong id="disc-total-comments">0</strong>
                 </div>
-                <div class="stat-item" style="text-align: right;">
+                <div class="stat-item" style="text-align: center;">
                   <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট রিপ্লাই</span>
                   <strong id="disc-total-replies">0</strong>
+                </div>
+                <div class="stat-item" style="text-align: right;">
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট লাইক</span>
+                  <strong id="disc-total-likes">0</strong>
                 </div>
               </div>
             </div>
@@ -1200,7 +1230,7 @@
               <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
                 <div>
                   <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary);">কমিউনিটি ডিসকাশন থ্রেড</h3>
-                  <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">মতামত পড়ুন, লাইক দিন অথবা যে কোনো মতামতে রিপ্লাই করুন</p>
+                  <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">মতামত পড়ুন, ভিউ ও লাইক ট্র্যাক করুন এবং যে কোনো মতামতে অনায়াসে রিপ্লাই করুন</p>
                 </div>
                 <div style="display: flex; gap: 4px; background: #F1F5F9; padding: 3px; border-radius: 8px;">
                   <button id="sort-recent-btn" onclick="setDiscussionSort('recent')" class="nav-tab active" style="padding: 5px 12px; font-size: 12px;">সর্বশেষ</button>
@@ -1232,17 +1262,19 @@
       <span id="toast-text">ভোট সফলভাবে সংরক্ষিত হয়েছে!</span>
     </div>
 
-    <!-- PURE JAVASCRIPT LOGIC -->
+    <!-- PURE JAVASCRIPT LOGIC - 100% REAL DATA FROM FIREBASE RTDB -->
     <script>
       // Firebase Realtime Database REST Endpoint
       const FIREBASE_RTDB_ENDPOINT = "https://rsverify-76143-default-rtdb.firebaseio.com/poll_data.json";
 
-      // Default Template
+      // Clean Initial Template with 0 Mock Data
       const DEFAULT_POLL_DATA = {
         pollId: "dev-society-ai-agents-2026",
         title: "Autonomous AI Agent Setup & 24/7 AI Support Systems Voting",
         subtitle: "অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।",
         totalVoters: 0,
+        totalViews: 0,
+        pollLikes: 0,
         topics: [
           {
             id: "autonomous-ai-agents",
@@ -1314,10 +1346,11 @@
         comments: []
       };
 
-      const STORAGE_KEY = "dev_society_poll_fb_store_v3";
+      const STORAGE_KEY = "dev_society_poll_fb_real_v5";
       const VOTER_KEY = "dev_society_voter_unique_id_fb";
+      const POLL_LIKE_KEY = "dev_society_poll_liked_v5";
 
-      // Avatar Color Palette
+      // Color Palette for Avatars
       const AVATAR_PALETTES = [
         { bg: "#F0FDF4", text: "#166534", border: "#BBF7D0" },
         { bg: "#EFF6FF", text: "#1E40AF", border: "#BFDBFE" },
@@ -1375,6 +1408,11 @@
       let showResults = false;
       let activeTab = "poll";
       let discussionSort = "recent";
+      let lastSyncedDataString = "";
+      let isPollLiked = localStorage.getItem(POLL_LIKE_KEY) === "true";
+
+      // Store in-progress drafts so re-renders NEVER delete user typed text!
+      const replyDrafts = {};
       const openReplyBoxes = new Set();
       const likedCommentIds = new Set();
 
@@ -1392,18 +1430,59 @@
 
       syncVotedState();
 
-      // Fetch shared data directly from Firebase Realtime Database
+      // Track 100% Real Page Visit to Firebase Realtime Database
+      async function trackRealVisit() {
+        const visitKey = "dev_society_last_visit_session";
+        const lastSession = sessionStorage.getItem(visitKey);
+        if (!lastSession) {
+          sessionStorage.setItem(visitKey, Date.now().toString());
+          try {
+            const res = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+            if (res.ok) {
+              const latest = await res.json();
+              if (latest) {
+                latest.totalViews = (latest.totalViews || 0) + 1;
+                await fetch(FIREBASE_RTDB_ENDPOINT, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(latest)
+                });
+                pollData = latest;
+                saveLocalCache(pollData);
+                updateCountersOnly();
+              }
+            }
+          } catch (e) {
+            console.warn("View tracking sync issue:", e);
+          }
+        }
+      }
+
+      // Fetch 100% shared real data from Firebase Realtime Database
       async function fetchFirebasePoll() {
         try {
           const res = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
           if (res.ok) {
             const data = await res.json();
             if (data && Array.isArray(data.topics) && data.topics.length > 0) {
+              const currentString = JSON.stringify(data);
+              if (currentString === lastSyncedDataString) {
+                return;
+              }
+              lastSyncedDataString = currentString;
+
+              const activeEl = document.activeElement;
+              const isTyping = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA');
+
               pollData = data;
               saveLocalCache(data);
               syncVotedState();
-              render();
-              return;
+
+              if (isTyping && activeTab === "comments") {
+                updateCountersOnly();
+              } else {
+                render();
+              }
             }
           }
         } catch (e) {
@@ -1411,7 +1490,8 @@
         }
       }
 
-      setInterval(fetchFirebasePoll, 3500);
+      // Poll periodically to keep all real data fresh
+      setInterval(fetchFirebasePoll, 6000);
 
       // Tab Switching
       function switchTab(tab) {
@@ -1507,6 +1587,7 @@
       // Render Topics (2-column grid on desktop, 1-col on mobile)
       function renderTopics() {
         const container = document.getElementById("topics-container");
+        if (!container) return;
         container.innerHTML = "";
 
         const totalVotes = pollData.topics.reduce((sum, t) => sum + (t.votes || 0), 0);
@@ -1574,6 +1655,7 @@
       // Render Schedules
       function renderSchedules() {
         const container = document.getElementById("schedules-container");
+        if (!container) return;
         container.innerHTML = "";
 
         const totalVotes = pollData.schedules.reduce((sum, s) => sum + (s.votes || 0), 0);
@@ -1607,17 +1689,65 @@
         });
       }
 
+      // Save draft text while typing
+      function onReplyAuthorInput(commentId, val) {
+        if (!replyDrafts[commentId]) replyDrafts[commentId] = { author: "RS CAPTAIn", text: "" };
+        replyDrafts[commentId].author = val;
+      }
+
+      function onReplyTextInput(commentId, val) {
+        if (!replyDrafts[commentId]) replyDrafts[commentId] = { author: "RS CAPTAIn", text: "" };
+        replyDrafts[commentId].text = val;
+      }
+
       // Toggle inline reply box
       function toggleReplyBox(commentId) {
         if (openReplyBoxes.has(commentId)) {
           openReplyBoxes.delete(commentId);
         } else {
           openReplyBoxes.add(commentId);
+          if (!replyDrafts[commentId]) {
+            replyDrafts[commentId] = { author: "RS CAPTAIn", text: "" };
+          }
         }
         renderComments();
       }
 
-      // Like a comment
+      // Like the poll itself (Real Poll Like)
+      async function togglePollLike() {
+        isPollLiked = !isPollLiked;
+        localStorage.setItem(POLL_LIKE_KEY, isPollLiked ? "true" : "false");
+
+        if (isPollLiked) {
+          pollData.pollLikes = (pollData.pollLikes || 0) + 1;
+          showToast("পোলে লাইক দেওয়া হয়েছে!");
+        } else {
+          pollData.pollLikes = Math.max(0, (pollData.pollLikes || 1) - 1);
+        }
+
+        updateCountersOnly();
+
+        try {
+          const res = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+          if (res.ok) {
+            const latest = await res.json();
+            if (latest) {
+              latest.pollLikes = pollData.pollLikes;
+              await fetch(FIREBASE_RTDB_ENDPOINT, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(latest)
+              });
+              pollData = latest;
+              saveLocalCache(pollData);
+            }
+          }
+        } catch (e) {
+          saveLocalCache(pollData);
+        }
+      }
+
+      // Like a comment (Real Comment Like)
       async function likeComment(commentId) {
         if (!commentId) return;
 
@@ -1634,8 +1764,8 @@
         }
 
         renderComments();
+        updateCountersOnly();
 
-        // Persist to Firebase Realtime Database
         try {
           const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
           let latest = freshRes.ok ? await freshRes.json() : pollData;
@@ -1661,10 +1791,9 @@
       async function submitReply(commentId) {
         const authorInput = document.getElementById(`reply-author-${commentId}`);
         const textInput = document.getElementById(`reply-text-${commentId}`);
-        if (!textInput) return;
 
         const author = authorInput && authorInput.value.trim() ? authorInput.value.trim() : "RS CAPTAIn";
-        const text = textInput.value.trim();
+        const text = textInput ? textInput.value.trim() : (replyDrafts[commentId] ? replyDrafts[commentId].text.trim() : "");
 
         if (!text) {
           alert("অনুগ্রহ করে আপনার রিপ্লাই লিখুন।");
@@ -1685,11 +1814,13 @@
           targetComment.replies.push(newReply);
         }
 
+        delete replyDrafts[commentId];
         openReplyBoxes.delete(commentId);
+
         renderComments();
+        updateCountersOnly();
         showToast("রিপ্লাই সফলভাবে যোগ হয়েছে!");
 
-        // Persist to Firebase Realtime Database
         try {
           const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
           let latest = freshRes.ok ? await freshRes.json() : pollData;
@@ -1736,6 +1867,7 @@
           time: "এইমাত্র",
           timestamp: Date.now(),
           likes: 0,
+          views: 1,
           replies: []
         };
 
@@ -1743,7 +1875,8 @@
         pollData.comments.unshift(newComment);
 
         if (bodyInput) bodyInput.value = "";
-        render();
+        renderComments();
+        updateCountersOnly();
         showToast("মতামত সফলভাবে যোগ হয়েছে!");
 
         try {
@@ -1765,18 +1898,53 @@
         }
       }
 
-      // Render Comments Feed with Threaded Replies
-      function renderComments() {
-        const container = document.getElementById("comments-list");
-        container.innerHTML = "";
-
+      // 100% Real Counters Calculation directly from Real Data
+      function updateCountersOnly() {
+        const totalVotes = pollData.topics.reduce((sum, t) => sum + (t.votes || 0), 0);
         const allComments = pollData.comments || [];
         const totalReplies = allComments.reduce((acc, c) => acc + (c.replies ? c.replies.length : 0), 0);
+        const totalCommentLikes = allComments.reduce((acc, c) => acc + (c.likes || 0), 0);
+        const pollLikes = pollData.pollLikes || 0;
+        const totalLikes = pollLikes + totalCommentLikes;
+        const totalViews = pollData.totalViews || 0;
 
+        const headerTotalVotes = document.getElementById("header-total-votes");
+        const headerTotalViews = document.getElementById("header-total-views");
+        const summaryTotalVotes = document.getElementById("summary-total-votes");
+        const summaryTotalViews = document.getElementById("summary-total-views");
+        const summaryTotalLikes = document.getElementById("summary-total-likes");
+        const tabVoteCount = document.getElementById("tab-vote-count");
+        const tabCommentCount = document.getElementById("tab-comment-count");
         const discTotalComments = document.getElementById("disc-total-comments");
         const discTotalReplies = document.getElementById("disc-total-replies");
+        const discTotalLikes = document.getElementById("disc-total-likes");
+        const pollLikesBadge = document.getElementById("poll-likes-badge");
+        const pollLikeIcon = document.getElementById("poll-like-icon");
+
+        if (headerTotalVotes) headerTotalVotes.textContent = totalVotes;
+        if (headerTotalViews) headerTotalViews.textContent = totalViews;
+        if (summaryTotalVotes) summaryTotalVotes.textContent = totalVotes;
+        if (summaryTotalViews) summaryTotalViews.textContent = totalViews;
+        if (summaryTotalLikes) summaryTotalLikes.textContent = totalLikes;
+        if (tabVoteCount) tabVoteCount.textContent = totalVotes;
+        if (tabCommentCount) tabCommentCount.textContent = allComments.length;
         if (discTotalComments) discTotalComments.textContent = allComments.length;
         if (discTotalReplies) discTotalReplies.textContent = totalReplies;
+        if (discTotalLikes) discTotalLikes.textContent = totalCommentLikes;
+        if (pollLikesBadge) pollLikesBadge.textContent = pollLikes;
+
+        if (pollLikeIcon) {
+          pollLikeIcon.setAttribute("fill", isPollLiked ? "#E11D48" : "none");
+        }
+      }
+
+      // Render Comments Feed with Threaded Replies & View/Like Counters
+      function renderComments() {
+        const container = document.getElementById("comments-list");
+        if (!container) return;
+
+        const allComments = pollData.comments || [];
+        updateCountersOnly();
 
         if (allComments.length === 0) {
           container.innerHTML = `
@@ -1790,10 +1958,12 @@
         // Sort comments
         let displayList = [...allComments];
         if (discussionSort === "top") {
-          displayList.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+          displayList.sort((a, b) => ((b.likes || 0) + (b.replies ? b.replies.length : 0)) - ((a.likes || 0) + (a.replies ? a.replies.length : 0)));
         } else {
           displayList.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
         }
+
+        container.innerHTML = "";
 
         displayList.forEach(comment => {
           const card = document.createElement("div");
@@ -1805,6 +1975,8 @@
           const isLiked = likedCommentIds.has(comment.id);
           const repliesList = comment.replies || [];
           const isReplyOpen = openReplyBoxes.has(comment.id);
+          const draft = replyDrafts[comment.id] || { author: "RS CAPTAIn", text: "" };
+          const commentViews = comment.views || 0;
 
           // Build nested replies HTML
           let repliesHtml = "";
@@ -1831,13 +2003,13 @@
             repliesHtml += `</div>`;
           }
 
-          // Build inline reply input HTML
+          // Build inline reply input HTML with draft state preservation
           let replyBoxHtml = "";
           if (isReplyOpen) {
             replyBoxHtml = `
               <div class="inline-reply-box">
-                <input type="text" id="reply-author-${comment.id}" class="app-input" style="padding: 8px 12px; font-size: 12.5px;" value="RS CAPTAIn" placeholder="আপনার নাম / হ্যান্ডেল" />
-                <textarea id="reply-text-${comment.id}" class="app-input" rows="2" style="padding: 8px 12px; font-size: 13px; resize: vertical;" placeholder="রিপ্লাই লিখুন..."></textarea>
+                <input type="text" id="reply-author-${comment.id}" class="app-input" style="padding: 8px 12px; font-size: 12.5px;" value="${escapeHtml(draft.author)}" placeholder="আপনার নাম / হ্যান্ডেল" oninput="onReplyAuthorInput('${comment.id}', this.value)" />
+                <textarea id="reply-text-${comment.id}" class="app-input" rows="2" style="padding: 8px 12px; font-size: 13px; resize: vertical;" placeholder="রিপ্লাই লিখুন..." oninput="onReplyTextInput('${comment.id}', this.value)">${escapeHtml(draft.text)}</textarea>
                 <div style="display: flex; justify-content: flex-end; gap: 8px;">
                   <button onclick="toggleReplyBox('${comment.id}')" class="btn-sub-action" style="width: auto; padding: 6px 12px; font-size: 12px;">বাতিল</button>
                   <button onclick="submitReply('${comment.id}')" class="btn-submit-main" style="width: auto; padding: 6px 14px; font-size: 12px;">রিপ্লাই পোস্ট করুন</button>
@@ -1866,14 +2038,22 @@
             <p class="comment-main-text">${escapeHtml(comment.text)}</p>
 
             <div class="comment-actions-bar">
+              <span class="comment-stat-chip" title="মোট ভিউ">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span>${commentViews} ভিউ</span>
+              </span>
+
               <button onclick="likeComment('${comment.id}')" class="action-link-btn ${isLiked ? 'liked' : ''}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="${isLiked ? '#E11D48' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                 </svg>
-                <span>${likesCount > 0 ? likesCount : 'লাইক'}</span>
+                <span>${likesCount} লাইক</span>
               </button>
 
-              <button onclick="toggleReplyBox('${comment.id}')" class="action-link-btn">
+              <button onclick="toggleReplyBox('${comment.id}')" class="action-link-btn ${isReplyOpen ? 'active-reply-btn' : ''}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="9 17 4 12 9 7"/>
                   <path d="M20 18v-2a4 4 0 0 0-4-4H4"/>
@@ -1892,12 +2072,7 @@
 
       // Full State Render
       function render() {
-        const totalVotes = pollData.topics.reduce((sum, t) => sum + (t.votes || 0), 0);
-
-        document.getElementById("header-total-votes").textContent = totalVotes;
-        document.getElementById("summary-total-votes").textContent = totalVotes;
-        document.getElementById("tab-vote-count").textContent = totalVotes;
-        document.getElementById("tab-comment-count").textContent = pollData.comments ? pollData.comments.length : 0;
+        updateCountersOnly();
 
         document.getElementById("voted-alert").style.display = hasVoted ? "flex" : "none";
         document.getElementById("feedback-card").style.display = hasVoted ? "none" : "block";
@@ -1988,6 +2163,7 @@
               time: "এইমাত্র",
               timestamp: Date.now(),
               likes: 0,
+              views: 1,
               replies: []
             });
           }
@@ -2041,8 +2217,10 @@
         return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
       }
 
+      // Initial Launch
       render();
       fetchFirebasePoll();
+      trackRealVisit();
     </script>
   </body>
 </html>
