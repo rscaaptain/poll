@@ -2,5 +2,7 @@
   "name": "DevSociety Voting Hub",
   "description": "Interactive community voting and decision hub for Developer Society live sessions, topics, and community polls.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

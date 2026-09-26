@@ -2,36 +2,39 @@
 <html lang="bn">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DevSociety Voting Hub</title>
-    <meta name="description" content="Interactive community voting and decision hub for Developer Society live sessions, topics, and community polls." />
-    <meta property="og:title" content="DevSociety Voting Hub" />
-    <meta property="og:description" content="Interactive community voting and decision hub for Developer Society live sessions, topics, and community polls." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>DevSociety Automation Voting Hub</title>
+    <meta name="description" content="মোবাইল ও নো-কোড অটোমেশন ভোটিং হাব - টুর্নামেন্ট ডেইলি ম্যাচ অটো অ্যাড এবং আধুনিক অটোমেশন পোল।" />
+    <meta property="og:title" content="DevSociety Automation Voting Hub" />
+    <meta property="og:description" content="মোবাইল ও নো-কোড অটোমেশন ভোটিং হাব - টুর্নামেন্ট ডেইলি ম্যাচ অটো অ্যাড এবং আধুনিক অটোমেশন পোল।" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
       :root {
         --brand-green: #62BD00;
         --brand-hover: #54A400;
-        --brand-dark: #2D5A00;
-        --brand-text: #3F7B00;
+        --brand-dark: #274F00;
+        --brand-text: #376C00;
         --brand-light: #F2FCE8;
         --brand-light-border: #D6F2AF;
         --bg-page: #F8FAF6;
         --bg-card: #FFFFFF;
         --border-color: #E2E8DF;
         --text-primary: #0F172A;
-        --text-secondary: #475569;
+        --text-secondary: #334155;
         --text-muted: #64748B;
+        --radius-lg: 16px;
+        --radius-md: 12px;
       }
 
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        -webkit-tap-highlight-color: transparent;
       }
 
       html {
@@ -59,14 +62,14 @@
         position: sticky;
         top: 0;
         z-index: 40;
-        background-color: rgba(255, 255, 255, 0.96);
-        backdrop-filter: blur(8px);
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border-color);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
       }
 
       .header-container {
-        max-width: 672px;
+        max-width: 680px;
         margin: 0 auto;
         padding: 12px 16px;
         display: flex;
@@ -81,9 +84,9 @@
       }
 
       .brand-logo {
-        width: 40px;
-        height: 40px;
-        background-color: var(--brand-green);
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(135deg, #62BD00, #4C9400);
         color: #ffffff;
         font-weight: 800;
         font-size: 15px;
@@ -91,7 +94,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 6px rgba(98, 189, 0, 0.25);
+        box-shadow: 0 4px 10px rgba(98, 189, 0, 0.28);
         flex-shrink: 0;
       }
 
@@ -117,7 +120,7 @@
 
       @keyframes pulse {
         0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.3); opacity: 0.6; }
+        50% { transform: scale(1.35); opacity: 0.6; }
       }
 
       .brand-info p {
@@ -136,7 +139,7 @@
         background-color: var(--brand-light);
         color: var(--brand-text);
         border: 1px solid var(--brand-light-border);
-        padding: 4px 12px;
+        padding: 5px 12px;
         border-radius: 9999px;
         font-size: 12px;
         font-weight: 700;
@@ -145,7 +148,7 @@
       /* Tabs */
       .tabs-nav {
         display: flex;
-        max-width: 672px;
+        max-width: 680px;
         margin: 0 auto;
         border-top: 1px solid #f1f5f9;
       }
@@ -156,13 +159,13 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 10px 16px;
+        padding: 11px 16px;
         font-size: 13px;
         font-weight: 700;
         color: var(--text-muted);
         background: transparent;
         border: none;
-        border-bottom: 2px solid transparent;
+        border-bottom: 2.5px solid transparent;
         cursor: pointer;
         transition: all 0.2s ease;
       }
@@ -174,7 +177,7 @@
 
       .tab-btn.active {
         color: var(--text-primary);
-        border-bottom: 2px solid var(--brand-green);
+        border-bottom: 2.5px solid var(--brand-green);
         background-color: var(--brand-light);
       }
 
@@ -182,19 +185,19 @@
       .main-content {
         flex: 1;
         width: 100%;
-        max-width: 672px;
+        max-width: 680px;
         margin: 0 auto;
-        padding: 20px 16px 36px 16px;
+        padding: 16px 14px 40px 14px;
       }
 
       /* Cards */
       .card {
         background-color: var(--bg-card);
         border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-        margin-bottom: 16px;
+        border-radius: var(--radius-lg);
+        padding: 20px 18px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        margin-bottom: 14px;
       }
 
       .card-header {
@@ -220,10 +223,16 @@
       }
 
       .card-title {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 800;
         color: var(--text-primary);
         line-height: 1.35;
+      }
+
+      @media (min-width: 640px) {
+        .card-title {
+          font-size: 19px;
+        }
       }
 
       .card-subtitle {
@@ -233,18 +242,56 @@
         line-height: 1.5;
       }
 
-      .alert-box {
+      /* Locked Vote Banner (Ultra clean, no underline, sleek badge) */
+      .vote-locked-banner {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background-color: #F8FAF5;
+        border: 1px solid var(--brand-light-border);
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        margin-top: 14px;
+      }
+
+      @media (min-width: 480px) {
+        .vote-locked-banner {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
+
+      .vote-status-text {
         display: flex;
         align-items: center;
-        gap: 10px;
-        background-color: var(--brand-light);
-        border: 1px solid var(--brand-light-border);
-        color: var(--brand-dark);
-        padding: 10px 14px;
-        border-radius: 12px;
+        gap: 8px;
         font-size: 12px;
         font-weight: 600;
-        margin-top: 14px;
+        color: var(--brand-dark);
+      }
+
+      .btn-locked-action {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background-color: #ffffff;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: not-allowed;
+        text-decoration: none !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        user-select: none;
+      }
+
+      .btn-locked-action:hover {
+        background-color: #ffffff;
+        color: var(--text-secondary);
+        text-decoration: none !important;
       }
 
       /* Option Items */
@@ -258,11 +305,17 @@
       }
 
       .question-title {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 800;
         color: var(--text-primary);
         margin-top: 2px;
         margin-bottom: 14px;
+      }
+
+      @media (min-width: 640px) {
+        .question-title {
+          font-size: 16px;
+        }
       }
 
       .options-list {
@@ -275,7 +328,7 @@
       .option-card {
         border: 1px solid var(--border-color);
         background-color: #ffffff;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         padding: 14px 16px;
         display: flex;
         align-items: flex-start;
@@ -294,12 +347,12 @@
       .option-card.selected {
         border-color: var(--brand-green);
         background-color: var(--brand-light);
-        box-shadow: 0 0 0 1px var(--brand-green);
+        box-shadow: 0 0 0 1.5px var(--brand-green);
       }
 
       .radio-circle {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
         border: 2px solid #cbd5e1;
         margin-top: 2px;
@@ -308,6 +361,7 @@
         justify-content: center;
         flex-shrink: 0;
         transition: all 0.2s ease;
+        background-color: #ffffff;
       }
 
       .option-card.selected .radio-circle {
@@ -316,8 +370,8 @@
       }
 
       .radio-dot {
-        width: 6px;
-        height: 6px;
+        width: 7px;
+        height: 7px;
         background-color: #ffffff;
         border-radius: 50%;
         display: none;
@@ -335,6 +389,7 @@
         font-size: 14px;
         font-weight: 700;
         color: var(--text-primary);
+        line-height: 1.4;
       }
 
       .option-card.selected .option-title {
@@ -344,15 +399,15 @@
       .option-desc {
         font-size: 12px;
         color: var(--text-muted);
-        margin-top: 3px;
-        line-height: 1.4;
+        margin-top: 4px;
+        line-height: 1.45;
       }
 
       /* Result Progress Bar Card */
       .result-card {
         border: 1px solid var(--border-color);
         background-color: #ffffff;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         padding: 14px 16px;
         position: relative;
         overflow: hidden;
@@ -362,7 +417,8 @@
 
       .result-card.is-user-pick {
         border-color: var(--brand-green);
-        box-shadow: 0 0 0 1px var(--brand-green);
+        box-shadow: 0 0 0 1.5px var(--brand-green);
+        background-color: #FBFDF9;
       }
 
       .progress-bg {
@@ -371,7 +427,7 @@
         bottom: 0;
         left: 0;
         background-color: var(--brand-light);
-        opacity: 0.9;
+        opacity: 0.95;
         transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 1;
       }
@@ -394,7 +450,7 @@
       .result-left {
         display: flex;
         align-items: flex-start;
-        gap: 8px;
+        gap: 10px;
       }
 
       .result-stats {
@@ -415,12 +471,12 @@
       }
 
       .progress-bar-wrap {
-        height: 6px;
+        height: 7px;
         width: 100%;
         background-color: #e2e8f0;
         border-radius: 9999px;
         overflow: hidden;
-        margin-top: 4px;
+        margin-top: 5px;
       }
 
       .progress-bar-fill {
@@ -434,9 +490,9 @@
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        padding: 2px 6px;
+        padding: 2px 7px;
         border-radius: 6px;
-        font-size: 10px;
+        font-size: 10.5px;
         font-weight: 800;
       }
 
@@ -467,7 +523,7 @@
       .schedule-btn {
         border: 1px solid var(--border-color);
         background-color: #ffffff;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         padding: 12px 14px;
         text-align: left;
         cursor: pointer;
@@ -484,7 +540,7 @@
       .schedule-btn.selected {
         border-color: var(--brand-green);
         background-color: var(--brand-light);
-        box-shadow: 0 0 0 1px var(--brand-green);
+        box-shadow: 0 0 0 1.5px var(--brand-green);
       }
 
       .schedule-title {
@@ -510,7 +566,7 @@
         display: flex;
         flex-direction: column;
         gap: 6px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
 
       .input-label {
@@ -521,7 +577,7 @@
 
       .text-input {
         width: 100%;
-        padding: 10px 14px;
+        padding: 11px 14px;
         font-size: 13px;
         border: 1px solid var(--border-color);
         border-radius: 10px;
@@ -542,7 +598,7 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        margin-top: 16px;
+        margin-top: 14px;
       }
 
       @media (min-width: 640px) {
@@ -561,7 +617,7 @@
         color: #ffffff;
         border: none;
         padding: 14px 20px;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         font-size: 15px;
         font-weight: 800;
         cursor: pointer;
@@ -587,7 +643,7 @@
         color: var(--text-secondary);
         border: 1px solid var(--border-color);
         padding: 12px 18px;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
@@ -608,7 +664,7 @@
         color: var(--brand-dark);
         border: 1px solid var(--brand-light-border);
         padding: 12px 18px;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
@@ -686,7 +742,7 @@
         transform: translateX(-50%);
         background-color: #0f172a;
         color: #ffffff;
-        padding: 10px 18px;
+        padding: 10px 20px;
         border-radius: 9999px;
         font-size: 13px;
         font-weight: 600;
@@ -744,7 +800,7 @@
               <span class="pulse-dot"></span>
             </h1>
             <p>
-              <span>Next Live Stream Poll</span>
+              <span>Autonomous AI Agents & Support Setup Poll</span>
               <span>•</span>
               <strong id="header-total-votes" style="color: var(--text-primary); font-family: monospace;">0</strong> জন ভোট দিয়েছেন
             </p>
@@ -759,7 +815,7 @@
             <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
             <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>
           </svg>
-          <span>পোল চলমান</span>
+          <span>পোল সক্রিয়</span>
         </div>
       </div>
 
@@ -801,29 +857,36 @@
             </span>
           </div>
 
-          <h2 class="card-title">Developer Society — Next Live Stream Topic & Time</h2>
+          <h2 class="card-title">Autonomous AI Agent Setup & 24/7 AI Support Systems Voting</h2>
           <p class="card-subtitle">
-            কমিউনিটির পরবর্তী লাইভ সেশনের টপিক এবং সময় নির্ধারণে আপনার রিয়েল ভোট দিন। ভোট দেওয়ার সাথে সাথেই দেখুন লাইভ পার্সেন্টেজ।
+            অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।
           </p>
 
-          <div id="voted-alert" class="alert-box" style="display: none;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-            <span style="flex: 1;">আপনার ভোট সফলভাবে সংরক্ষিত হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
-            <button onclick="changeVote()" style="background: transparent; border: none; color: var(--brand-dark); font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 12px;">
-              ভোট পরিবর্তন
-            </button>
+          <!-- Vote Status Banner when voted: Clean UI, NO underline, Vote Locked -->
+          <div id="voted-alert" class="vote-locked-banner" style="display: none;">
+            <div class="vote-status-text">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <span>আপনার ভোট গ্রহণ করা হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
+            </div>
+            <div class="btn-locked-action" onclick="showLockedNotice()" title="ফলাফলের স্বচ্ছতার জন্য ভোট পরিবর্তন অপশন লক করা আছে">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span>ভোট পরিবর্তন (লকড)</span>
+            </div>
           </div>
         </div>
 
-        <!-- Question 1: Topics -->
+        <!-- Question 1: AI Agent Topics -->
         <div class="card">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
             <div>
               <span class="question-label">প্রশ্ন ১</span>
-              <h3 class="question-title">পরবর্তী লাইভে কোন টপিকের উপর সেশন চান?</h3>
+              <h3 class="question-title">কোন অ্যাডভান্সড এআই এজেন্ট বা অটোমেশন সিস্টেমের উপর লাইভ সেশন চান?</h3>
             </div>
             <span id="results-pill" style="display: none; font-size: 11px; font-weight: 700; color: var(--brand-text); background-color: var(--brand-light); border: 1px solid var(--brand-light-border); padding: 3px 8px; border-radius: 6px; font-family: monospace;">
               রিয়েল পার্সেন্টেজ
@@ -835,7 +898,7 @@
           </div>
         </div>
 
-        <!-- Question 2: Schedules -->
+        <!-- Question 2: Preferred Time -->
         <div class="card">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
             <div>
@@ -853,17 +916,17 @@
           </div>
         </div>
 
-        <!-- Identity & Feedback (if voting) -->
+        <!-- Identity & Feedback (if not yet voted) -->
         <div id="feedback-card" class="card">
-          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও মতামত (ঐচ্ছিক)</h3>
-          <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও অটোমেশন রিকোয়েস্ট (ঐচ্ছিক)</h3>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
             <div class="input-group">
               <label class="input-label" for="voter-name-input">আপনার নাম / টেলিগ্রাম বা ফেসবুক নাম</label>
               <input type="text" id="voter-name-input" class="text-input" placeholder="যেমন: তানভীর আহমেদ বা @arif_dev" />
             </div>
             <div class="input-group">
-              <label class="input-label" for="voter-comment-input">লাইভ সেশন সম্পর্কে কোনো নির্দিষ্ট মতামত বা অনুরোধ</label>
-              <input type="text" id="voter-comment-input" class="text-input" placeholder="যেমন: প্র্যাক্টিক্যাল কোডিং ও ফ্রি ডিপ্লয়মেন্ট দেখতে চাই" />
+              <label class="input-label" for="voter-comment-input">অন্য কোনো অটোমেশন আইডিয়া বা পরামর্শ থাকলে লিখুন</label>
+              <input type="text" id="voter-comment-input" class="text-input" placeholder="যেমন: গুগল শিট থেকে অটো ম্যাচ শিডিউল আপডেট দেখতে চাই" />
             </div>
           </div>
         </div>
@@ -907,16 +970,16 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <h3 style="font-size: 16px; font-weight: 800;">মেম্বারদের মতামত ও লাইভ পরামর্শ</h3>
+            <h3 style="font-size: 16px; font-weight: 800;">কমিউনিটি মতামত ও অটোমেশন রিকোয়েস্ট</h3>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-            ভোট দেওয়ার সময় ডেভেলপার মেম্বাররা যা লিখেছেন তা নিচে প্রদর্শিত হচ্ছে। আপনিও মতামত যোগ করতে পারেন।
+            ভোট দেওয়ার সময় মেম্বাররা যে অটোমেশন আইডিয়া বা মতামত লিখেছেন তা নিচে প্রদর্শিত হচ্ছে।
           </p>
 
           <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
-            <input type="text" id="quick-author-input" class="text-input" placeholder="আপনার নাম বা হ্যান্ডেল" style="margin-bottom: 4px;" />
+            <input type="text" id="quick-author-input" class="text-input" placeholder="আপনার নাম বা হ্যান্ডেল" style="margin-bottom: 2px;" />
             <div style="display: flex; gap: 8px;">
-              <input type="text" id="quick-comment-input" class="text-input" placeholder="লাইভ সেশন নিয়ে কোনো পরামর্শ লিখুন..." />
+              <input type="text" id="quick-comment-input" class="text-input" placeholder="অটোমেশন নিয়ে কোনো পরামর্শ লিখুন..." />
               <button onclick="postQuickComment()" class="btn-primary" style="padding: 10px 16px; font-size: 13px; flex: none;">
                 পোস্ট
               </button>
@@ -936,7 +999,7 @@
         Developer Society Community • Official Polling Portal
       </p>
       <p style="font-size: 11px; margin-top: 4px; font-family: monospace;">
-        Pure Static HTML, CSS & JavaScript • Theme #62BD00
+        Mobile & No-Code Automation • Theme #62BD00
       </p>
     </footer>
 
@@ -951,35 +1014,59 @@
 
     <!-- PURE JAVASCRIPT LOGIC & LOCAL JSON DATA -->
     <script>
-      // Initial Real Data Template (0 fake votes)
+      // Advanced AI Agents & Support Setup Poll Topics
       const DEFAULT_POLL_DATA = {
-        pollId: "dev-society-live-2026",
-        title: "Developer Society — Next Live Stream Topic & Time",
-        subtitle: "কমিউনিটির পরবর্তী লাইভ সেশনের টপিক এবং সময় নির্ধারণে আপনার রিয়েল ভোট দিন।",
+        pollId: "dev-society-ai-agents-2026",
+        title: "Autonomous AI Agent Setup & 24/7 AI Support Systems Voting",
+        subtitle: "অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।",
         totalVoters: 0,
         topics: [
           {
-            id: "fullstack-ai",
-            title: "Full-Stack AI Web Apps (React 19 + Gemini API + Vector DB)",
-            description: "হাতে-কলমে প্র্যাক্টিক্যাল এআই প্রজেক্ট তৈরি ও ডিপ্লয়মেন্ট",
+            id: "autonomous-ai-agents",
+            title: "অটোনোমাস এআই এজেন্ট সেটআপ সিস্টেম (Autonomous Multi-Agent AI System)",
+            description: "মানুষের বারবার কমান্ড ছাড়াই নিজে নিজে মার্কেট রিসার্চ, কোড লেখা, ডাটা অ্যানালাইসিস ও সম্পূর্ণ টাস্ক একা সম্পাদনকারী এআই এজেন্ট আর্কিটেকচার।",
             votes: 0
           },
           {
-            id: "system-design",
-            title: "High-Scale System Design (Microservices, Redis & Kafka)",
-            description: "লার্জ-স্কেল প্রোডাকশন অ্যাপ্লিকেশনের আর্কিটেকচার ও স্কেলিং",
+            id: "ai-support-setup",
+            title: "২৪/৭ এআই কাস্টমার সাপোর্ট ও সেলস এজেন্ট সেটআপ (24/7 AI Customer Support & Sales Agent)",
+            description: "হোয়াটসঅ্যাপ, মেসেঞ্জার ও ওয়েবসাইটে ক্লায়েন্টের সাথে মানুষের মতো বাংলায় কথা বলে প্রবলেম সলভ, প্রোডাক্ট সেলস ও লিড কনফার্ম করার স্বয়ংক্রিয় এআই সিস্টেম।",
             votes: 0
           },
           {
-            id: "devops-cicd",
-            title: "Modern DevOps Masterclass (Docker, CI/CD, Kubernetes)",
-            description: "অটোমেটেড বিল্ড, ডেভঅপ্স ওয়ার্কফ্লো ও ক্লাউড কনটেইনার",
+            id: "ai-video-autoupload",
+            title: "অটো ভিডিও জেনারেটর ও ডেইলি অটো-আপলোড সিস্টেম (AI Video Gen & Auto-Uploader Engine)",
+            description: "মানুষের কোনো হাত না দিয়েই প্রতিদিন ট্রেন্ডিং টপিক নিয়ে স্বয়ংক্রিয়ভাবে ভিডিও জেনারেট হবে এবং সরাসরি ইউটিউব, ফেসবুক ও টিকটকে ডেইলি অটো-আপলোড হবে।",
             votes: 0
           },
           {
-            id: "remote-career",
-            title: "Remote Job Preparation & Live Portfolio/Resume Review",
-            description: "আন্তর্জাতিক রিমোট জব ইন্টারভিউ ও ক্যারিয়ার গাইডলাইন",
+            id: "daily-automsg-scheduler",
+            title: "ডেইলি অটো-মেসেজ ও কমিউনিটি শিডিউলার সিস্টেম (Daily Auto-Messaging & Broadcast Agent)",
+            description: "প্রতিদিন কোনো ম্যানুয়াল কাজ ছাড়াই নির্দিষ্ট সময়ে গ্রুপ, চ্যানেল ও কাস্টমারদের কাছে স্বয়ংক্রিয়ভাবে ডেইলি মেসেজ, আপডেট ও ম্যাচ অ্যালার্ট পাঠানোর সিস্টেম।",
+            votes: 0
+          },
+          {
+            id: "ninety-percent-business-auto",
+            title: "৯০% হ্যান্ডস-ফ্রি বিজনেস ও একাউন্টিং অটোমেশন (90% Hands-Free Business & Invoice Automation)",
+            description: "অর্ডার কনফার্মেশন থেকে শুরু করে বিকাশ/নগদ পেমেন্ট ট্র্যাকিং, অটো ইনভয়েস তৈরি এবং শিটে হিসাব আপডেট করার কমপ্লিট ৯০% অটোমেশন আর্কিটেকচার।",
+            votes: 0
+          },
+          {
+            id: "ai-voice-calling",
+            title: "এআই ভয়েস কলিং ও টেলিফোনিক সাপোর্ট এজেন্ট (Real-time AI Voice Support & Calling Bot)",
+            description: "সরাসরি ফোন কলে কাস্টমারের সাথে রিয়েল-টাইম বাংলায় কথা বলে সাপোর্ট দেওয়া, অ্যাপয়েন্টমেন্ট বুকিং ও ফলো-আপ কল দেওয়ার এআই ভয়েস এজেন্ট সেটআপ।",
+            votes: 0
+          },
+          {
+            id: "tournament-match-auto",
+            title: "টুর্নামেন্ট ও ডেইলি অপারেশনস এআই অটো-ম্যানেজার (Daily Matches & Verification Agent)",
+            description: "প্রতিদিনের ম্যাচ শিডিউল তৈরি, বিকাশ/নগদ পেমেন্ট স্ক্রিনশট অটো-ভেরিফাই, স্লট বুকিং এবং লিডারবোর্ড তৈরির অল-ইন-ওয়ান এআই সুপারভাইজার।",
+            votes: 0
+          },
+          {
+            id: "ai-reels-media-engine",
+            title: "এআই ভিডিও রিলস ও সোশ্যাল মিডিয়া অটো-ক্রিয়েটর ইঞ্জিন (Autonomous AI Viral Media Engine)",
+            description: "টপিক দিলে স্বয়ংক্রিয়ভাবে ভাইরাল স্ক্রিপ্ট তৈরি, ভয়েসওভার জেনারেট, ভিডিও ক্লিপ এডিটিং এবং সোশ্যাল মিডিয়ায় শিডিউল পোস্ট করার কমপ্লিট এআই ইঞ্জিন।",
             votes: 0
           }
         ],
@@ -995,8 +1082,8 @@
             votes: 0
           },
           {
-            id: "fri-430pm",
-            title: "শুক্রবার বিকেল ৪:৩০ টা (Friday 4:30 PM)",
+            id: "fri-500pm",
+            title: "শুক্রবার বিকেল ৫:০০ টা (Friday 5:00 PM)",
             votes: 0
           }
         ],
@@ -1004,8 +1091,8 @@
         comments: []
       };
 
-      const STORAGE_KEY = "dev_society_poll_static_store_v1";
-      const VOTER_KEY = "dev_society_voter_unique_id_v1";
+      const STORAGE_KEY = "dev_society_poll_static_store_v5";
+      const VOTER_KEY = "dev_society_voter_unique_id_v5";
 
       // Load or initialize JSON Store
       function getPollData() {
@@ -1031,7 +1118,7 @@
         }
       }
 
-      // Unique Voter ID
+      // Unique Voter ID per device/browser
       function getVoterId() {
         let id = localStorage.getItem(VOTER_KEY);
         if (!id) {
@@ -1075,7 +1162,12 @@
         }, 3000);
       }
 
-      // Confetti Animation Engine (Pure Vanilla JS, 0 dependencies)
+      // Notice when clicking Locked Vote
+      function showLockedNotice() {
+        showToast("ভোটের স্বচ্ছতা রক্ষার্থে একবার ভোট দেওয়ার পর তা পরিবর্তনযোগ্য নয়।");
+      }
+
+      // Confetti Animation Engine (Pure Vanilla JS, 0 external dependencies)
       function launchConfetti() {
         const canvas = document.getElementById("confetti-canvas");
         if (!canvas) return;
@@ -1108,7 +1200,7 @@
           particles.forEach(p => {
             p.x += p.vx;
             p.y += p.vy;
-            p.vy += 0.3; // gravity
+            p.vy += 0.3;
             p.rotation += p.rSpeed;
             p.opacity -= 0.015;
 
@@ -1153,21 +1245,14 @@
             // Results Progress Bar View
             const card = document.createElement("div");
             card.className = "result-card" + (isUserPick ? " is-user-pick" : "");
-            if (!hasVoted) {
-              card.style.cursor = "pointer";
-              card.onclick = () => {
-                selectedTopicId = topic.id;
-                render();
-              };
-            }
 
             card.innerHTML = `
               <div class="progress-bg" style="width: ${percentage}%;"></div>
               <div class="result-inner">
                 <div class="result-top">
                   <div class="result-left">
-                    <div style="width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid ${isUserPick ? '#62BD00' : '#cbd5e1'}; background: ${isUserPick ? '#62BD00' : '#ffffff'}; display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                      ${isUserPick ? '<span style="color: white; font-size: 10px; font-weight: 800;">✓</span>' : ''}
+                    <div style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid ${isUserPick ? '#62BD00' : '#cbd5e1'}; background: ${isUserPick ? '#62BD00' : '#ffffff'}; display: flex; align-items: center; justify-content: center; margin-top: 2px; flex-shrink: 0;">
+                      ${isUserPick ? '<span style="color: white; font-size: 11px; font-weight: 800;">✓</span>' : ''}
                     </div>
                     <div>
                       <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
@@ -1175,7 +1260,7 @@
                         ${isUserPick ? '<span class="badge-tag badge-your-vote">আপনার ভোট</span>' : ''}
                         ${isLeading ? '<span class="badge-tag badge-leader">সবচেয়ে বেশি ভোট</span>' : ''}
                       </div>
-                      ${topic.description ? `<p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">${escapeHtml(topic.description)}</p>` : ''}
+                      ${topic.description ? `<p style="font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.45;">${escapeHtml(topic.description)}</p>` : ''}
                     </div>
                   </div>
                   <div class="result-stats">
@@ -1235,7 +1320,7 @@
 
           let bgProgress = "";
           if (showResults) {
-            bgProgress = `<div style="position: absolute; top:0; bottom:0; left:0; width:${percentage}%; background-color: var(--brand-light); opacity: 0.8; z-index: 1;"></div>`;
+            bgProgress = `<div style="position: absolute; top:0; bottom:0; left:0; width:${percentage}%; background-color: var(--brand-light); opacity: 0.85; z-index: 1;"></div>`;
           }
 
           btn.innerHTML = `
@@ -1310,10 +1395,10 @@
         renderComments();
       }
 
-      // Submit Vote
+      // Submit Vote (Permanently recorded, cannot be changed repeatedly)
       function submitVote() {
         if (!selectedTopicId) {
-          alert("অনুগ্রহ করে একটি লাইভ টপিক সিলেক্ট করুন।");
+          alert("অনুগ্রহ করে একটি অটোমেশন টপিক সিলেক্ট করুন।");
           return;
         }
 
@@ -1364,32 +1449,7 @@
         showResults = true;
         render();
         launchConfetti();
-        showToast("আপনার ভোট সফলভাবে সংরক্ষিত হয়েছে!");
-      }
-
-      // Change Vote
-      function changeVote() {
-        const existingIdx = pollData.votesLog.findIndex(v => v.voterId === currentVoterId);
-        if (existingIdx !== -1) {
-          const prev = pollData.votesLog[existingIdx];
-          // decrement
-          const topic = pollData.topics.find(t => t.id === prev.selectedTopicId);
-          if (topic) topic.votes = Math.max(0, topic.votes - 1);
-
-          if (prev.selectedScheduleId) {
-            const sch = pollData.schedules.find(s => s.id === prev.selectedScheduleId);
-            if (sch) sch.votes = Math.max(0, sch.votes - 1);
-          }
-
-          pollData.totalVoters = Math.max(0, pollData.totalVoters - 1);
-          pollData.votesLog.splice(existingIdx, 1);
-          savePollData(pollData);
-        }
-
-        hasVoted = false;
-        showResults = false;
-        render();
-        showToast("ভোট পরিবর্তন মোড চালু হয়েছে। নতুন অপশন সিলেক্ট করুন।");
+        showToast("আপনার ভোট সফলভাবে সংরক্ষিত ও লক করা হয়েছে!");
       }
 
       // Toggle Preview
