@@ -1,0 +1,112 @@
+{
+  "pollId": "dev-society-live-poll",
+  "title": "Developer Society — Next Live Stream Topic & Time",
+  "subtitle": "আমাদের পরবর্তী লাইভ সেশনের টপিক এবং সময় নির্ধারণে আপনার ভোট দিন।",
+  "status": "active",
+  "createdAt": "2026-09-26",
+  "totalVoters": 182,
+  "topics": [
+    {
+      "id": "fullstack-ai",
+      "title": "Full-Stack AI Web Apps (React 19 + Gemini API + Vector DB)",
+      "description": "হাতে কলমে প্র্যাক্টিক্যাল প্রজেক্ট তৈরি ও ফ্রি ডিপ্লয়মেন্ট গাইড",
+      "votes": 84
+    },
+    {
+      "id": "system-design",
+      "title": "High-Scale System Design (Microservices, Redis, Kafka)",
+      "description": "বড় প্রডাকশন অ্যাপ্লিকেশনের স্কেলেবল আর্কিটেকচার ডিজাইন",
+      "votes": 52
+    },
+    {
+      "id": "devops-cicd",
+      "title": "Modern DevOps Masterclass (Docker, GitHub Actions, K8s)",
+      "description": "অটোমেটেড CI/CD পাইপলাইন ও ক্লাউড কনটেইনারাইজেশন",
+      "votes": 28
+    },
+    {
+      "id": "remote-career",
+      "title": "Remote Job Preparation & Live Portfolio/Resume Review",
+      "description": "ইন্টারন্যাশনাল রিমোট সফটওয়্যার ইঞ্জিনিয়ারিং জব পাওয়ার রোডম্যাপ",
+      "votes": 18
+    }
+  ],
+  "schedules": [
+    {
+      "id": "fri-9pm",
+      "title": "শুক্রবার রাত ৯:০০ টা (Friday 9:00 PM)",
+      "votes": 105
+    },
+    {
+      "id": "sat-830pm",
+      "title": "শনিবার রাত ৮:৩০ টা (Saturday 8:30 PM)",
+      "votes": 51
+    },
+    {
+      "id": "fri-430pm",
+      "title": "শুক্রবার বিকেল ৪:৩০ টা (Friday 4:30 PM)",
+      "votes": 26
+    }
+  ],
+  "votesLog": [
+    {
+      "id": "vote-1",
+      "voterName": "তানভীর আহমেদ (Tanvir)",
+      "selectedTopicId": "fullstack-ai",
+      "selectedTopicTitle": "Full-Stack AI Web Apps (React 19 + Gemini API + Vector DB)",
+      "selectedScheduleId": "fri-9pm",
+      "timestamp": "2026-09-26T07:15:00Z",
+      "comment": "এআই এজেন্টস এবং ভেক্টর ডেটাবেজ কীভাবে একসাথে ইন্টিগ্রেট করে এটা দেখতে চাই।"
+    },
+    {
+      "id": "vote-2",
+      "voterName": "Saiful Islam",
+      "selectedTopicId": "system-design",
+      "selectedTopicTitle": "High-Scale System Design (Microservices, Redis, Kafka)",
+      "selectedScheduleId": "fri-9pm",
+      "timestamp": "2026-09-26T07:22:00Z",
+      "comment": "System design session is crucial for tech lead roles. Friday 9pm is perfect."
+    },
+    {
+      "id": "vote-3",
+      "voterName": "ফারহানা রহমান",
+      "selectedTopicId": "fullstack-ai",
+      "selectedTopicTitle": "Full-Stack AI Web Apps (React 19 + Gemini API + Vector DB)",
+      "selectedScheduleId": "sat-830pm",
+      "timestamp": "2026-09-26T07:35:00Z",
+      "comment": "React 19 এর নতুন ফিচারগুলো প্রজেক্টে কীভাবে কাজে লাগাব তা জানতে চাই।"
+    },
+    {
+      "id": "vote-4",
+      "voterName": "Nayeem Dev",
+      "selectedTopicId": "devops-cicd",
+      "selectedTopicTitle": "Modern DevOps Masterclass (Docker, GitHub Actions, K8s)",
+      "selectedScheduleId": "fri-9pm",
+      "timestamp": "2026-09-26T07:48:00Z",
+      "comment": "Docker এবং CI/CD পাইপলাইন শুরু থেকে শেষ পর্যন্ত লাইভ দেখালে দারুণ উপকার হবে।"
+    }
+  ],
+  "comments": [
+    {
+      "id": "c-1",
+      "author": "তানভীর আহমেদ (Tanvir)",
+      "text": "এআই এজেন্টস এবং ভেক্টর ডেটাবেজ কীভাবে একসাথে ইন্টিগ্রেট করে এটা দেখতে চাই।",
+      "topic": "Full-Stack AI Web Apps",
+      "time": "১০ মিনিট আগে"
+    },
+    {
+      "id": "c-2",
+      "author": "Saiful Islam",
+      "text": "System design session is crucial for tech lead roles. Friday 9pm is perfect.",
+      "topic": "High-Scale System Design",
+      "time": "২৫ মিনিট আগে"
+    },
+    {
+      "id": "c-3",
+      "author": "ফারহানা রহমান",
+      "text": "React 19 এর নতুন ফিচারগুলো প্রজেক্টে কীভাবে কাজে লাগাব তা জানতে চাই।",
+      "topic": "Full-Stack AI Web Apps",
+      "time": "৪৫ মিনিট আগে"
+    }
+  ]
+}

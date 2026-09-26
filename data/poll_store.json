@@ -1,0 +1,53 @@
+{
+  "pollId": "dev-society-live-2026",
+  "title": "Developer Society — Next Live Stream Topic & Time",
+  "subtitle": "কমিউনিটির পরবর্তী লাইভ সেশনের টপিক এবং সময় নির্ধারণে আপনার রিয়েল ভোট দিন।",
+  "status": "active",
+  "createdAt": "2026-09-26",
+  "totalVoters": 0,
+  "topics": [
+    {
+      "id": "topic-fullstack-ai",
+      "title": "Full-Stack AI Web Apps (React 19 + Gemini API + Vector DB)",
+      "description": "হাতে-কলমে প্র্যাক্টিক্যাল এআই প্রজেক্ট তৈরি ও ডিপ্লয়মেন্ট",
+      "votes": 0
+    },
+    {
+      "id": "topic-system-design",
+      "title": "High-Scale System Design (Microservices, Redis & Kafka)",
+      "description": "লার্জ-স্কেল প্রোডাকশন অ্যাপ্লিকেশনের আর্কিটেকচার ও স্কেলিং",
+      "votes": 0
+    },
+    {
+      "id": "topic-devops-cicd",
+      "title": "Modern DevOps Masterclass (Docker, CI/CD, Kubernetes)",
+      "description": "অটোমেটেড বিল্ড, ডেভঅপ্স ওয়ার্কফ্লো ও ক্লাউড কনটেইনার",
+      "votes": 0
+    },
+    {
+      "id": "topic-remote-career",
+      "title": "Remote Job Preparation & Live Portfolio/Resume Review",
+      "description": "আন্তর্জাতিক রিমোট জব ইন্টারভিউ ও ক্যারিয়ার গাইডলাইন",
+      "votes": 0
+    }
+  ],
+  "schedules": [
+    {
+      "id": "sch-fri-9pm",
+      "title": "শুক্রবার রাত ৯:০০ টা (Friday 9:00 PM BST)",
+      "votes": 0
+    },
+    {
+      "id": "sch-sat-830pm",
+      "title": "শনিবার রাত ৮:৩০ টা (Saturday 8:30 PM BST)",
+      "votes": 0
+    },
+    {
+      "id": "sch-fri-430pm",
+      "title": "শুক্রবার বিকেল ৪:৩০ টা (Friday 4:30 PM BST)",
+      "votes": 0
+    }
+  ],
+  "votesLog": [],
+  "comments": []
+}
