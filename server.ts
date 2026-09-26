@@ -11,7 +11,7 @@ const PORT = 3000;
 const DATA_DIR = path.join(__dirname, 'data');
 const DATA_FILE = path.join(DATA_DIR, 'poll_store.json');
 
-// Ensure data file exists with 0 fake votes
+// Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
@@ -26,18 +26,10 @@ function readPollData() {
     console.error('Error reading poll data:', err);
   }
 
-  // Fallback to src/data/poll_store.json
-  const defaultFile = path.join(__dirname, 'src', 'data', 'poll_store.json');
-  if (fs.existsSync(defaultFile)) {
-    const content = fs.readFileSync(defaultFile, 'utf-8');
-    fs.writeFileSync(DATA_FILE, content, 'utf-8');
-    return JSON.parse(content);
-  }
-
   return {
-    pollId: 'dev-society-live-2026',
-    title: 'Developer Society — Next Live Stream Topic & Time',
-    subtitle: 'কমিউনিটির পরবর্তী লাইভ সেশনের টপিক এবং সময় নির্ধারণে আপনার রিয়েল ভোট দিন।',
+    pollId: 'dev-society-ai-agents-2026',
+    title: 'Autonomous AI Agent Setup & 24/7 AI Support Systems Voting',
+    subtitle: 'অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।',
     status: 'active',
     createdAt: '2026-09-26',
     totalVoters: 0,
@@ -52,7 +44,7 @@ function writePollData(data: any) {
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8');
   } catch (err) {
-    console.error('Error writing poll data:', err);
+    console.error('Error writing poll data to JSON file:', err);
   }
 }
 
@@ -60,13 +52,32 @@ async function startServer() {
   const app = express();
   app.use(express.json());
 
-  // GET /api/poll - Return current poll state
+  // Universal CORS support so clients from GitHub Pages, mobile or local can access
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200);
+    }
+    next();
+  });
+
+  // GET /api/poll - Return current shared JSON data
   app.get('/api/poll', (_req, res) => {
     const data = readPollData();
     res.json(data);
   });
 
-  // POST /api/vote - Cast a vote
+  // GET /api/download-json - Download raw poll_store.json file
+  app.get('/api/download-json', (_req, res) => {
+    const data = readPollData();
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Disposition', 'attachment; filename="poll_store.json"');
+    res.send(JSON.stringify(data, null, 2));
+  });
+
+  // POST /api/vote - Cast a vote and save to JSON
   app.post('/api/vote', (req, res) => {
     const { topicId, scheduleId, voterName, comment, voterId } = req.body;
     if (!topicId) {
@@ -130,7 +141,7 @@ async function startServer() {
         author: voterName?.trim() || 'Anonymous Developer',
         text: comment.trim(),
         topic: topic?.title || topicId,
-        time: 'Just now',
+        time: 'এইমাত্র',
       });
     }
 
@@ -138,37 +149,29 @@ async function startServer() {
     res.json({ success: true, poll: data, vote: newVoteEntry });
   });
 
-  // POST /api/change-vote - Clear vote for voter
-  app.post('/api/change-vote', (req, res) => {
-    const { voterId } = req.body;
-    if (!voterId) {
-      return res.status(400).json({ error: 'voterId required' });
+  // POST /api/comment - Add comment only and save to JSON
+  app.post('/api/comment', (req, res) => {
+    const { author, text, topic } = req.body;
+    if (!text || !text.trim()) {
+      return res.status(400).json({ error: 'Comment text is required' });
     }
 
     const data = readPollData();
-    const existingIndex = data.votesLog.findIndex(
-      (v: any) => v.voterId && v.voterId === voterId
-    );
+    const newComment = {
+      id: `comment-${Date.now()}`,
+      author: author?.trim() || 'Dev Member',
+      text: text.trim(),
+      topic: topic || 'সাধারণ মতামত',
+      time: 'এইমাত্র',
+    };
 
-    if (existingIndex !== -1) {
-      const prevVote = data.votesLog[existingIndex];
-      data.topics = data.topics.map((t: any) =>
-        t.id === prevVote.selectedTopicId ? { ...t, votes: Math.max(0, t.votes - 1) } : t
-      );
-      if (prevVote.selectedScheduleId) {
-        data.schedules = data.schedules.map((s: any) =>
-          s.id === prevVote.selectedScheduleId ? { ...s, votes: Math.max(0, s.votes - 1) } : s
-        );
-      }
-      data.votesLog.splice(existingIndex, 1);
-      data.totalVoters = Math.max(0, data.totalVoters - 1);
-      writePollData(data);
-    }
+    data.comments.unshift(newComment);
+    writePollData(data);
 
-    res.json({ success: true, poll: data });
+    res.json({ success: true, comment: newComment, poll: data });
   });
 
-  // POST /api/reset - Reset to 0 real votes (testing utility)
+  // POST /api/reset - Reset to 0 real votes
   app.post('/api/reset', (_req, res) => {
     const data = readPollData();
     data.totalVoters = 0;
@@ -179,6 +182,9 @@ async function startServer() {
     writePollData(data);
     res.json({ success: true, poll: data });
   });
+
+  // Serve static data directory for direct JSON access
+  app.use('/data', express.static(DATA_DIR));
 
   // Vite middleware in dev or static files in production
   if (process.env.NODE_ENV === 'production' && fs.existsSync(path.join(__dirname, 'dist'))) {

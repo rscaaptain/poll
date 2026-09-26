@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>DevSociety Automation Voting Hub</title>
-    <meta name="description" content="মোবাইল ও নো-কোড অটোমেশন ভোটিং হাব - টুর্নামেন্ট ডেইলি ম্যাচ অটো অ্যাড এবং আধুনিক অটোমেশন পোল।" />
-    <meta property="og:title" content="DevSociety Automation Voting Hub" />
-    <meta property="og:description" content="মোবাইল ও নো-কোড অটোমেশন ভোটিং হাব - টুর্নামেন্ট ডেইলি ম্যাচ অটো অ্যাড এবং আধুনিক অটোমেশন পোল।" />
+    <title>DevSociety Automation & AI Agents Voting Hub</title>
+    <meta name="description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - সরাসরি poll_store.json ফাইলে সমস্ত রিয়েল-টাইম বুকিং সংরক্ষিত হয়।" />
+    <meta property="og:title" content="DevSociety Automation & AI Agents Voting Hub" />
+    <meta property="og:description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - সরাসরি poll_store.json ফাইলে সমস্ত রিয়েল-টাইম বুকিং সংরক্ষিত হয়।" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -132,6 +132,12 @@
         margin-top: 2px;
       }
 
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
       .status-pill {
         display: flex;
         align-items: center;
@@ -139,10 +145,32 @@
         background-color: var(--brand-light);
         color: var(--brand-text);
         border: 1px solid var(--brand-light-border);
-        padding: 5px 12px;
+        padding: 5px 10px;
         border-radius: 9999px;
         font-size: 12px;
         font-weight: 700;
+      }
+
+      .btn-json-pill {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        background-color: #ffffff;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+        padding: 5px 11px;
+        border-radius: 9999px;
+        font-size: 11.5px;
+        font-weight: 700;
+        font-family: 'JetBrains Mono', monospace;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .btn-json-pill:hover {
+        background-color: #f8fafc;
+        border-color: var(--brand-green);
+        color: var(--brand-dark);
       }
 
       /* Tabs */
@@ -242,7 +270,21 @@
         line-height: 1.5;
       }
 
-      /* Locked Vote Banner (Ultra clean, no underline, sleek badge) */
+      /* Live Sync Indicator Banner */
+      .sync-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        color: var(--brand-text);
+        background: var(--brand-light);
+        border: 1px solid var(--brand-light-border);
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* Locked Vote Banner */
       .vote-locked-banner {
         display: flex;
         flex-direction: column;
@@ -286,12 +328,6 @@
         text-decoration: none !important;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         user-select: none;
-      }
-
-      .btn-locked-action:hover {
-        background-color: #ffffff;
-        color: var(--text-secondary);
-        text-decoration: none !important;
       }
 
       /* Option Items */
@@ -734,6 +770,91 @@
         border-radius: 6px;
       }
 
+      /* Modal for Live JSON Viewer */
+      .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      .modal-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-box {
+        background-color: #ffffff;
+        border-radius: var(--radius-lg);
+        width: 100%;
+        max-width: 640px;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        border-bottom: 1px solid #f1f5f9;
+        background-color: #f8fafc;
+      }
+
+      .modal-title {
+        font-size: 14px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-primary);
+      }
+
+      .modal-content {
+        padding: 16px;
+        overflow-y: auto;
+        flex: 1;
+      }
+
+      .json-viewer {
+        background-color: #0f172a;
+        color: #38bdf8;
+        padding: 14px;
+        border-radius: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11.5px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+
+      .modal-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 12px 18px;
+        border-top: 1px solid #f1f5f9;
+        background-color: #f8fafc;
+      }
+
       /* Toast Notification */
       .toast {
         position: fixed;
@@ -750,7 +871,7 @@
         align-items: center;
         gap: 8px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        z-index: 100;
+        z-index: 1100;
         border: 1px solid rgba(98, 189, 0, 0.4);
         opacity: 0;
         pointer-events: none;
@@ -800,22 +921,35 @@
               <span class="pulse-dot"></span>
             </h1>
             <p>
-              <span>Autonomous AI Agents & Support Setup Poll</span>
+              <span>Live Shared Poll</span>
               <span>•</span>
               <strong id="header-total-votes" style="color: var(--text-primary); font-family: monospace;">0</strong> জন ভোট দিয়েছেন
             </p>
           </div>
         </div>
 
-        <div class="status-pill">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/>
-            <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/>
-            <circle cx="12" cy="12" r="2"/>
-            <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
-            <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>
-          </svg>
-          <span>পোল সক্রিয়</span>
+        <div class="header-actions">
+          <button class="btn-json-pill" onclick="openJsonModal()" title="লাইভ poll_store.json ফাইল দেখুন ও ডাউনলোড করুন">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span>JSON ফাইল</span>
+          </button>
+
+          <div class="status-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/>
+              <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/>
+              <circle cx="12" cy="12" r="2"/>
+              <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
+              <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>
+            </svg>
+            <span>লাইভ সিংক</span>
+          </div>
         </div>
       </div>
 
@@ -852,14 +986,17 @@
               </svg>
               অফিশিয়াল কমিউনিটি পোল
             </span>
-            <span style="font-size: 12px; color: var(--text-muted); font-family: monospace;">
-              মোট রিয়েল ভোট: <strong id="summary-total-votes" style="color: var(--text-primary); font-size: 13px;">0</strong> টি
-            </span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="sync-badge" id="sync-status-indicator">● রিয়েল-টাইম সিংক</span>
+              <span style="font-size: 12px; color: var(--text-muted); font-family: monospace;">
+                মোট ভোট: <strong id="summary-total-votes" style="color: var(--text-primary); font-size: 13px;">0</strong> টি
+              </span>
+            </div>
           </div>
 
           <h2 class="card-title">Autonomous AI Agent Setup & 24/7 AI Support Systems Voting</h2>
           <p class="card-subtitle">
-            অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।
+            অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন। সমস্ত বুকিং ও ভোট সরাসরি সার্ভারের JSON ফাইলে সেভ হয়।
           </p>
 
           <!-- Vote Status Banner when voted: Clean UI, NO underline, Vote Locked -->
@@ -869,7 +1006,7 @@
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span>আপনার ভোট গ্রহণ করা হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
+              <span>আপনার ভোট poll_store.json-এ সংরক্ষিত হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
             </div>
             <div class="btn-locked-action" onclick="showLockedNotice()" title="ফলাফলের স্বচ্ছতার জন্য ভোট পরিবর্তন অপশন লক করা আছে">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -918,7 +1055,7 @@
 
         <!-- Identity & Feedback (if not yet voted) -->
         <div id="feedback-card" class="card">
-          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও অটোমেশন রিকোয়েস্ট (ঐচ্ছিক)</h3>
+          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও বুকিং তথ্য (সরাসরি JSON-এ সেভ হবে)</h3>
           <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
             <div class="input-group">
               <label class="input-label" for="voter-name-input">আপনার নাম / টেলিগ্রাম বা ফেসবুক নাম</label>
@@ -926,7 +1063,7 @@
             </div>
             <div class="input-group">
               <label class="input-label" for="voter-comment-input">অন্য কোনো অটোমেশন আইডিয়া বা পরামর্শ থাকলে লিখুন</label>
-              <input type="text" id="voter-comment-input" class="text-input" placeholder="যেমন: গুগল শিট থেকে অটো ম্যাচ শিডিউল আপডেট দেখতে চাই" />
+              <input type="text" id="voter-comment-input" class="text-input" placeholder="যেমন: গুগল শিট ও হোয়াটসঅ্যাপ অটো-মেসেজিং দেখতে চাই" />
             </div>
           </div>
         </div>
@@ -938,7 +1075,7 @@
               <line x1="22" y1="2" x2="11" y2="13"/>
               <polygon points="22 2 15 22 11 13 2 9 22 2"/>
             </svg>
-            <span>ভোট সাবমিট করুন (Submit Vote)</span>
+            <span>ভোট সাবমিট করুন (Save to JSON)</span>
           </button>
 
           <button id="btn-toggle-results" class="btn-secondary" onclick="toggleResultsPreview()">
@@ -973,7 +1110,7 @@
             <h3 style="font-size: 16px; font-weight: 800;">কমিউনিটি মতামত ও অটোমেশন রিকোয়েস্ট</h3>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-            ভোট দেওয়ার সময় মেম্বাররা যে অটোমেশন আইডিয়া বা মতামত লিখেছেন তা নিচে প্রদর্শিত হচ্ছে।
+            ভোট ও মতামত দেওয়ার সাথে সাথেই ডেটাবেসের JSON ফাইলে সেভ হয় এবং সবার ফোনে লাইভ দেখা যায়।
           </p>
 
           <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
@@ -993,13 +1130,48 @@
       </div>
     </main>
 
+    <!-- Modal for poll_store.json Live Viewer -->
+    <div id="json-modal" class="modal-backdrop">
+      <div class="modal-box">
+        <div class="modal-header">
+          <div class="modal-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span>data/poll_store.json (লাইভ ফাইল)</span>
+          </div>
+          <button onclick="closeJsonModal()" style="background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 18px; font-weight: 800;">✕</button>
+        </div>
+        <div class="modal-content">
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+            নিচের এই JSON ফাইলে সমস্ত ভোট, ভোটারদের নাম, কমেন্ট ও বুকিং স্টোর হয়ে আছে:
+          </p>
+          <pre class="json-viewer" id="json-modal-content">লোড হচ্ছে...</pre>
+        </div>
+        <div class="modal-footer">
+          <button onclick="copyJsonData()" class="btn-secondary" style="font-size: 12px; padding: 8px 14px;">
+            📋 জেসন কপি করুন
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button onclick="downloadJsonFile()" class="btn-primary" style="font-size: 12px; padding: 8px 16px;">
+              ⬇️ ডাউনলোড poll_store.json
+            </button>
+            <button onclick="closeJsonModal()" class="btn-secondary" style="font-size: 12px; padding: 8px 14px;">
+              বন্ধ করুন
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer class="app-footer">
       <p style="font-weight: 700; color: var(--text-secondary);">
         Developer Society Community • Official Polling Portal
       </p>
       <p style="font-size: 11px; margin-top: 4px; font-family: monospace;">
-        Mobile & No-Code Automation • Theme #62BD00
+        Real-time Shared Storage in /data/poll_store.json • Theme #62BD00
       </p>
     </footer>
 
@@ -1012,9 +1184,14 @@
       <span id="toast-text">ভোট সফলভাবে সংরক্ষিত হয়েছে!</span>
     </div>
 
-    <!-- PURE JAVASCRIPT LOGIC & LOCAL JSON DATA -->
+    <!-- PURE JAVASCRIPT LOGIC WITH SERVER JSON SYNC -->
     <script>
-      // Advanced AI Agents & Support Setup Poll Topics
+      // API Base URL Detection (Cloud backend or relative)
+      const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '0.0.0.0' || window.location.hostname.endsWith('run.app'))
+        ? ''
+        : 'https://ais-pre-jdiayfqwsnpnlf2xvhagvd-305765352675.asia-southeast1.run.app';
+
+      // Default Template
       const DEFAULT_POLL_DATA = {
         pollId: "dev-society-ai-agents-2026",
         title: "Autonomous AI Agent Setup & 24/7 AI Support Systems Voting",
@@ -1091,11 +1268,11 @@
         comments: []
       };
 
-      const STORAGE_KEY = "dev_society_poll_static_store_v5";
-      const VOTER_KEY = "dev_society_voter_unique_id_v5";
+      const STORAGE_KEY = "dev_society_poll_shared_store_v1";
+      const VOTER_KEY = "dev_society_voter_unique_id_shared";
 
-      // Load or initialize JSON Store
-      function getPollData() {
+      // Load cached store
+      function getCachedPollData() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
           if (raw) {
@@ -1105,20 +1282,19 @@
             }
           }
         } catch (e) {
-          console.warn("Storage read error", e);
+          console.warn("Cached read error", e);
         }
         return JSON.parse(JSON.stringify(DEFAULT_POLL_DATA));
       }
 
-      function savePollData(data) {
+      function saveLocalCache(data) {
         try {
           localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         } catch (e) {
-          console.warn("Storage write error", e);
+          console.warn("Cache write error", e);
         }
       }
 
-      // Unique Voter ID per device/browser
       function getVoterId() {
         let id = localStorage.getItem(VOTER_KEY);
         if (!id) {
@@ -1128,17 +1304,53 @@
         return id;
       }
 
-      // State
-      let pollData = getPollData();
+      let pollData = getCachedPollData();
       const currentVoterId = getVoterId();
 
-      // Find user's vote if already cast
-      const existingVote = pollData.votesLog ? pollData.votesLog.find(v => v.voterId === currentVoterId) : null;
-      let selectedTopicId = existingVote ? existingVote.selectedTopicId : (pollData.topics[0] ? pollData.topics[0].id : "");
-      let selectedScheduleId = existingVote ? existingVote.selectedScheduleId : (pollData.schedules[0] ? pollData.schedules[0].id : "");
-      let hasVoted = Boolean(existingVote);
-      let showResults = hasVoted;
+      let selectedTopicId = pollData.topics[0] ? pollData.topics[0].id : "";
+      let selectedScheduleId = pollData.schedules[0] ? pollData.schedules[0].id : "";
+      let hasVoted = false;
+      let showResults = false;
       let activeTab = "poll";
+
+      function syncVotedState() {
+        if (pollData.votesLog && Array.isArray(pollData.votesLog)) {
+          const existing = pollData.votesLog.find(v => v.voterId === currentVoterId);
+          if (existing) {
+            hasVoted = true;
+            showResults = true;
+            selectedTopicId = existing.selectedTopicId || selectedTopicId;
+            selectedScheduleId = existing.selectedScheduleId || selectedScheduleId;
+          }
+        }
+      }
+
+      syncVotedState();
+
+      // Fetch shared JSON from server
+      async function fetchServerPoll() {
+        try {
+          const res = await fetch(`${API_BASE}/api/poll`, { cache: 'no-store' });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && Array.isArray(data.topics)) {
+              pollData = data;
+              saveLocalCache(data);
+              syncVotedState();
+              render();
+              document.getElementById("sync-status-indicator").textContent = "● লাইভ সিংক সক্রিয়";
+              return;
+            }
+          }
+        } catch (e) {
+          // offline or network hiccup, fallback to cache
+          console.warn("Server poll sync:", e.message);
+          document.getElementById("sync-status-indicator").textContent = "● লোকাল ক্যাশ সক্রিয়";
+        }
+      }
+
+      // Auto poll every 6 seconds so user A and user B see each other's votes
+      setInterval(fetchServerPoll, 6000);
 
       // Tab Switching
       function switchTab(tab) {
@@ -1159,15 +1371,14 @@
         toast.classList.add("visible");
         setTimeout(() => {
           toast.classList.remove("visible");
-        }, 3000);
+        }, 3200);
       }
 
-      // Notice when clicking Locked Vote
       function showLockedNotice() {
         showToast("ভোটের স্বচ্ছতা রক্ষার্থে একবার ভোট দেওয়ার পর তা পরিবর্তনযোগ্য নয়।");
       }
 
-      // Confetti Animation Engine (Pure Vanilla JS, 0 external dependencies)
+      // Confetti Animation Engine
       function launchConfetti() {
         const canvas = document.getElementById("confetti-canvas");
         if (!canvas) return;
@@ -1231,12 +1442,13 @@
         const container = document.getElementById("topics-container");
         container.innerHTML = "";
 
-        const totalVotes = pollData.topics.reduce((sum, t) => sum + t.votes, 0);
-        const sorted = [...pollData.topics].sort((a, b) => b.votes - a.votes);
+        const totalVotes = pollData.topics.reduce((sum, t) => sum + (t.votes || 0), 0);
+        const sorted = [...pollData.topics].sort((a, b) => (b.votes || 0) - (a.votes || 0));
         const leadingId = totalVotes > 0 && sorted[0].votes > 0 ? sorted[0].id : null;
 
         pollData.topics.forEach(topic => {
-          const percentage = totalVotes > 0 ? Math.round((topic.votes / totalVotes) * 100) : 0;
+          const votesCount = topic.votes || 0;
+          const percentage = totalVotes > 0 ? Math.round((votesCount / totalVotes) * 100) : 0;
           const isSelected = selectedTopicId === topic.id;
           const isUserPick = hasVoted && isSelected;
           const isLeading = leadingId === topic.id;
@@ -1265,7 +1477,7 @@
                   </div>
                   <div class="result-stats">
                     <div class="result-percent">${percentage}%</div>
-                    <div class="result-count">${topic.votes} ভোট</div>
+                    <div class="result-count">${votesCount} ভোট</div>
                   </div>
                 </div>
                 <div class="progress-bar-wrap">
@@ -1302,10 +1514,11 @@
         const container = document.getElementById("schedules-container");
         container.innerHTML = "";
 
-        const totalVotes = pollData.schedules.reduce((sum, s) => sum + s.votes, 0);
+        const totalVotes = pollData.schedules.reduce((sum, s) => sum + (s.votes || 0), 0);
 
         pollData.schedules.forEach(schedule => {
-          const percentage = totalVotes > 0 ? Math.round((schedule.votes / totalVotes) * 100) : 0;
+          const votesCount = schedule.votes || 0;
+          const percentage = totalVotes > 0 ? Math.round((votesCount / totalVotes) * 100) : 0;
           const isSelected = selectedScheduleId === schedule.id;
 
           const btn = document.createElement("div");
@@ -1326,7 +1539,7 @@
           btn.innerHTML = `
             ${bgProgress}
             <div class="schedule-title">${escapeHtml(schedule.title)}</div>
-            ${showResults ? `<div class="schedule-percent">${percentage}% (${schedule.votes} ভোট)</div>` : ''}
+            ${showResults ? `<div class="schedule-percent">${percentage}% (${votesCount} ভোট)</div>` : ''}
           `;
           container.appendChild(btn);
         });
@@ -1366,7 +1579,7 @@
 
       // Full State Render
       function render() {
-        const totalVotes = pollData.topics.reduce((sum, t) => sum + t.votes, 0);
+        const totalVotes = pollData.topics.reduce((sum, t) => sum + (t.votes || 0), 0);
 
         document.getElementById("header-total-votes").textContent = totalVotes;
         document.getElementById("summary-total-votes").textContent = totalVotes;
@@ -1395,8 +1608,42 @@
         renderComments();
       }
 
-      // Submit Vote (Permanently recorded, cannot be changed repeatedly)
-      function submitVote() {
+      // Local fallback in case network offline
+      function applyLocalVote(name, comment) {
+        const topic = pollData.topics.find(t => t.id === selectedTopicId);
+        if (topic) topic.votes = (topic.votes || 0) + 1;
+
+        if (selectedScheduleId) {
+          const schedule = pollData.schedules.find(s => s.id === selectedScheduleId);
+          if (schedule) schedule.votes = (schedule.votes || 0) + 1;
+        }
+
+        pollData.totalVoters = (pollData.totalVoters || 0) + 1;
+        pollData.votesLog.unshift({
+          id: "vote_" + Date.now(),
+          voterId: currentVoterId,
+          voterName: name,
+          selectedTopicId: selectedTopicId,
+          selectedTopicTitle: topic ? topic.title : "",
+          selectedScheduleId: selectedScheduleId,
+          timestamp: new Date().toISOString(),
+          comment: comment || undefined
+        });
+
+        if (comment) {
+          pollData.comments.unshift({
+            id: "comment_" + Date.now(),
+            author: name,
+            text: comment,
+            topic: topic ? topic.title : "",
+            time: "এইমাত্র"
+          });
+        }
+        saveLocalCache(pollData);
+      }
+
+      // Submit Vote (Writes to server JSON file)
+      async function submitVote() {
         if (!selectedTopicId) {
           alert("অনুগ্রহ করে একটি অটোমেশন টপিক সিলেক্ট করুন।");
           return;
@@ -1407,49 +1654,45 @@
         const name = nameInput.value.trim() || "Anonymous Developer";
         const comment = commentInput.value.trim();
 
-        // Increment topic
-        const topic = pollData.topics.find(t => t.id === selectedTopicId);
-        if (topic) topic.votes += 1;
+        const btn = document.getElementById("btn-submit-vote");
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
 
-        // Increment schedule
-        if (selectedScheduleId) {
-          const schedule = pollData.schedules.find(s => s.id === selectedScheduleId);
-          if (schedule) schedule.votes += 1;
-        }
-
-        pollData.totalVoters += 1;
-
-        // Record in votesLog
-        const voteRecord = {
-          id: "vote_" + Date.now(),
-          voterId: currentVoterId,
-          voterName: name,
-          selectedTopicId: selectedTopicId,
-          selectedTopicTitle: topic ? topic.title : "",
-          selectedScheduleId: selectedScheduleId,
-          timestamp: new Date().toISOString(),
-          comment: comment || undefined
-        };
-        pollData.votesLog.unshift(voteRecord);
-
-        // Add to comments if provided
-        if (comment) {
-          pollData.comments.unshift({
-            id: "comment_" + Date.now(),
-            author: name,
-            text: comment,
-            topic: topic ? topic.title : "",
-            time: "এইমাত্র"
+        try {
+          const response = await fetch(`${API_BASE}/api/vote`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              topicId: selectedTopicId,
+              scheduleId: selectedScheduleId,
+              voterName: name,
+              comment: comment,
+              voterId: currentVoterId
+            })
           });
+
+          if (response.ok) {
+            const result = await response.json();
+            if (result && result.poll) {
+              pollData = result.poll;
+              saveLocalCache(pollData);
+            }
+          } else {
+            applyLocalVote(name, comment);
+          }
+        } catch (err) {
+          console.warn("Post to server failed, saved locally:", err);
+          applyLocalVote(name, comment);
         }
 
-        savePollData(pollData);
+        btn.disabled = false;
+        btn.style.opacity = "1";
 
         hasVoted = true;
         showResults = true;
         render();
         launchConfetti();
-        showToast("আপনার ভোট সফলভাবে সংরক্ষিত ও লক করা হয়েছে!");
+        showToast("আপনার ভোট ও বুকিং poll_store.json-এ সংরক্ষিত হয়েছে!");
       }
 
       // Toggle Preview
@@ -1459,7 +1702,7 @@
       }
 
       // Quick Comment Post
-      function postQuickComment() {
+      async function postQuickComment() {
         const authorInput = document.getElementById("quick-author-input");
         const commentInput = document.getElementById("quick-comment-input");
         const author = authorInput.value.trim() || "Dev Member";
@@ -1470,18 +1713,79 @@
           return;
         }
 
-        pollData.comments.unshift({
-          id: "comment_" + Date.now(),
-          author: author,
-          text: text,
-          topic: "সাধারণ মতামত",
-          time: "এইমাত্র"
-        });
+        try {
+          const res = await fetch(`${API_BASE}/api/comment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              author: author,
+              text: text,
+              topic: "সাধারণ মতামত"
+            })
+          });
 
-        savePollData(pollData);
+          if (res.ok) {
+            const result = await res.json();
+            if (result && result.poll) {
+              pollData = result.poll;
+              saveLocalCache(pollData);
+            }
+          } else {
+            pollData.comments.unshift({
+              id: "comment_" + Date.now(),
+              author: author,
+              text: text,
+              topic: "সাধারণ মতামত",
+              time: "এইমাত্র"
+            });
+            saveLocalCache(pollData);
+          }
+        } catch (e) {
+          pollData.comments.unshift({
+            id: "comment_" + Date.now(),
+            author: author,
+            text: text,
+            topic: "সাধারণ মতামত",
+            time: "এইমাত্র"
+          });
+          saveLocalCache(pollData);
+        }
+
         commentInput.value = "";
         render();
-        showToast("মতামত যোগ করা হয়েছে!");
+        showToast("মতামত poll_store.json-এ সেভ করা হয়েছে!");
+      }
+
+      // JSON Modal Functions
+      function openJsonModal() {
+        const modal = document.getElementById("json-modal");
+        const content = document.getElementById("json-modal-content");
+        content.textContent = JSON.stringify(pollData, null, 2);
+        modal.classList.add("open");
+      }
+
+      function closeJsonModal() {
+        document.getElementById("json-modal").classList.remove("open");
+      }
+
+      function copyJsonData() {
+        const jsonStr = JSON.stringify(pollData, null, 2);
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(jsonStr).then(() => {
+            showToast("সম্পূর্ণ JSON ক্লিপবোর্ডে কপি হয়েছে!");
+          });
+        }
+      }
+
+      function downloadJsonFile() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(pollData, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "poll_store.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+        showToast("poll_store.json ফাইল ডাউনলোড শুরু হয়েছে!");
       }
 
       // Share Link
@@ -1503,8 +1807,9 @@
         return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
       }
 
-      // Initial Call
+      // Initial Fetch & Render
       render();
+      fetchServerPoll();
     </script>
   </body>
 </html>
