@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>DevSociety Automation & AI Agents Voting Hub</title>
-    <meta name="description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - সরাসরি poll_store.json ফাইলে সমস্ত রিয়েল-টাইম বুকিং সংরক্ষিত হয়।" />
+    <meta name="description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - ফায়ারবেস রিয়েল-টাইম ডেটাবেসে সমস্ত ভোট ও বুকিং সংরক্ষিত হয়।" />
     <meta property="og:title" content="DevSociety Automation & AI Agents Voting Hub" />
-    <meta property="og:description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - সরাসরি poll_store.json ফাইলে সমস্ত রিয়েল-টাইম বুকিং সংরক্ষিত হয়।" />
+    <meta property="og:description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - ফায়ারবেস রিয়েল-টাইম ডেটাবেসে সমস্ত ভোট ও বুকিং সংরক্ষিত হয়।" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,32 +145,10 @@
         background-color: var(--brand-light);
         color: var(--brand-text);
         border: 1px solid var(--brand-light-border);
-        padding: 5px 10px;
+        padding: 5px 12px;
         border-radius: 9999px;
         font-size: 12px;
         font-weight: 700;
-      }
-
-      .btn-json-pill {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        background-color: #ffffff;
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        padding: 5px 11px;
-        border-radius: 9999px;
-        font-size: 11.5px;
-        font-weight: 700;
-        font-family: 'JetBrains Mono', monospace;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .btn-json-pill:hover {
-        background-color: #f8fafc;
-        border-color: var(--brand-green);
-        color: var(--brand-dark);
       }
 
       /* Tabs */
@@ -770,91 +748,6 @@
         border-radius: 6px;
       }
 
-      /* Modal for Live JSON Viewer */
-      .modal-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(4px);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-      }
-
-      .modal-backdrop.open {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      .modal-box {
-        background-color: #ffffff;
-        border-radius: var(--radius-lg);
-        width: 100%;
-        max-width: 640px;
-        max-height: 85vh;
-        display: flex;
-        flex-direction: column;
-        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.25);
-        border: 1px solid var(--border-color);
-        overflow: hidden;
-      }
-
-      .modal-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 14px 18px;
-        border-bottom: 1px solid #f1f5f9;
-        background-color: #f8fafc;
-      }
-
-      .modal-title {
-        font-size: 14px;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--text-primary);
-      }
-
-      .modal-content {
-        padding: 16px;
-        overflow-y: auto;
-        flex: 1;
-      }
-
-      .json-viewer {
-        background-color: #0f172a;
-        color: #38bdf8;
-        padding: 14px;
-        border-radius: 10px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 11.5px;
-        line-height: 1.5;
-        white-space: pre-wrap;
-        word-break: break-all;
-        max-height: 50vh;
-        overflow-y: auto;
-      }
-
-      .modal-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        padding: 12px 18px;
-        border-top: 1px solid #f1f5f9;
-        background-color: #f8fafc;
-      }
-
       /* Toast Notification */
       .toast {
         position: fixed;
@@ -929,17 +822,6 @@
         </div>
 
         <div class="header-actions">
-          <button class="btn-json-pill" onclick="openJsonModal()" title="লাইভ poll_store.json ফাইল দেখুন ও ডাউনলোড করুন">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <polyline points="10 9 9 9 8 9"/>
-            </svg>
-            <span>JSON ফাইল</span>
-          </button>
-
           <div class="status-pill">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/>
@@ -948,7 +830,7 @@
               <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
               <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>
             </svg>
-            <span>লাইভ সিংক</span>
+            <span id="sync-status-indicator">রিয়েল-টাইম ডিবি সক্রিয়</span>
           </div>
         </div>
       </div>
@@ -987,7 +869,7 @@
               অফিশিয়াল কমিউনিটি পোল
             </span>
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="sync-badge" id="sync-status-indicator">● রিয়েল-টাইম সিংক</span>
+              <span class="sync-badge">● ফায়ারবেস ক্লাউড ডিবি</span>
               <span style="font-size: 12px; color: var(--text-muted); font-family: monospace;">
                 মোট ভোট: <strong id="summary-total-votes" style="color: var(--text-primary); font-size: 13px;">0</strong> টি
               </span>
@@ -996,7 +878,7 @@
 
           <h2 class="card-title">Autonomous AI Agent Setup & 24/7 AI Support Systems Voting</h2>
           <p class="card-subtitle">
-            অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন। সমস্ত বুকিং ও ভোট সরাসরি সার্ভারের JSON ফাইলে সেভ হয়।
+            অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন। সমস্ত ভোট সরাসরি ফায়ারবেস ক্লাউড ডেটাবেসে রিয়েল-টাইমে সংরক্ষিত হয়।
           </p>
 
           <!-- Vote Status Banner when voted: Clean UI, NO underline, Vote Locked -->
@@ -1006,7 +888,7 @@
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
-              <span>আপনার ভোট poll_store.json-এ সংরক্ষিত হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
+              <span>আপনার ভোট ফায়ারবেস ডেটাবেসে সংরক্ষিত হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
             </div>
             <div class="btn-locked-action" onclick="showLockedNotice()" title="ফলাফলের স্বচ্ছতার জন্য ভোট পরিবর্তন অপশন লক করা আছে">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1055,7 +937,7 @@
 
         <!-- Identity & Feedback (if not yet voted) -->
         <div id="feedback-card" class="card">
-          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও বুকিং তথ্য (সরাসরি JSON-এ সেভ হবে)</h3>
+          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও বুকিং তথ্য (সরাসরি ডেটাবেসে সেভ হবে)</h3>
           <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
             <div class="input-group">
               <label class="input-label" for="voter-name-input">আপনার নাম / টেলিগ্রাম বা ফেসবুক নাম</label>
@@ -1075,7 +957,7 @@
               <line x1="22" y1="2" x2="11" y2="13"/>
               <polygon points="22 2 15 22 11 13 2 9 22 2"/>
             </svg>
-            <span>ভোট সাবমিট করুন (Save to JSON)</span>
+            <span>ভোট সাবমিট করুন (Submit Vote)</span>
           </button>
 
           <button id="btn-toggle-results" class="btn-secondary" onclick="toggleResultsPreview()">
@@ -1110,7 +992,7 @@
             <h3 style="font-size: 16px; font-weight: 800;">কমিউনিটি মতামত ও অটোমেশন রিকোয়েস্ট</h3>
           </div>
           <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-            ভোট ও মতামত দেওয়ার সাথে সাথেই ডেটাবেসের JSON ফাইলে সেভ হয় এবং সবার ফোনে লাইভ দেখা যায়।
+            ভোট ও মতামত দেওয়ার সাথে সাথেই ফায়ারবেস ক্লাউড ডেটাবেসে সেভ হয় এবং সবার ফোনে লাইভ দেখা যায়।
           </p>
 
           <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
@@ -1130,48 +1012,13 @@
       </div>
     </main>
 
-    <!-- Modal for poll_store.json Live Viewer -->
-    <div id="json-modal" class="modal-backdrop">
-      <div class="modal-box">
-        <div class="modal-header">
-          <div class="modal-title">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-            </svg>
-            <span>data/poll_store.json (লাইভ ফাইল)</span>
-          </div>
-          <button onclick="closeJsonModal()" style="background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 18px; font-weight: 800;">✕</button>
-        </div>
-        <div class="modal-content">
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
-            নিচের এই JSON ফাইলে সমস্ত ভোট, ভোটারদের নাম, কমেন্ট ও বুকিং স্টোর হয়ে আছে:
-          </p>
-          <pre class="json-viewer" id="json-modal-content">লোড হচ্ছে...</pre>
-        </div>
-        <div class="modal-footer">
-          <button onclick="copyJsonData()" class="btn-secondary" style="font-size: 12px; padding: 8px 14px;">
-            📋 জেসন কপি করুন
-          </button>
-          <div style="display: flex; gap: 8px;">
-            <button onclick="downloadJsonFile()" class="btn-primary" style="font-size: 12px; padding: 8px 16px;">
-              ⬇️ ডাউনলোড poll_store.json
-            </button>
-            <button onclick="closeJsonModal()" class="btn-secondary" style="font-size: 12px; padding: 8px 14px;">
-              বন্ধ করুন
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Footer -->
     <footer class="app-footer">
       <p style="font-weight: 700; color: var(--text-secondary);">
         Developer Society Community • Official Polling Portal
       </p>
       <p style="font-size: 11px; margin-top: 4px; font-family: monospace;">
-        Real-time Shared Storage in /data/poll_store.json • Theme #62BD00
+        Connected to Firebase Realtime Database • Theme #62BD00
       </p>
     </footer>
 
@@ -1184,12 +1031,10 @@
       <span id="toast-text">ভোট সফলভাবে সংরক্ষিত হয়েছে!</span>
     </div>
 
-    <!-- PURE JAVASCRIPT LOGIC WITH SERVER JSON SYNC -->
+    <!-- PURE JAVASCRIPT LOGIC DIRECTLY WITH FIREBASE REALTIME DATABASE -->
     <script>
-      // API Base URL Detection (Cloud backend or relative)
-      const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '0.0.0.0' || window.location.hostname.endsWith('run.app'))
-        ? ''
-        : 'https://ais-pre-jdiayfqwsnpnlf2xvhagvd-305765352675.asia-southeast1.run.app';
+      // Firebase Realtime Database REST Endpoint
+      const FIREBASE_RTDB_ENDPOINT = "https://rsverify-76143-default-rtdb.firebaseio.com/poll_data.json";
 
       // Default Template
       const DEFAULT_POLL_DATA = {
@@ -1268,8 +1113,8 @@
         comments: []
       };
 
-      const STORAGE_KEY = "dev_society_poll_shared_store_v1";
-      const VOTER_KEY = "dev_society_voter_unique_id_shared";
+      const STORAGE_KEY = "dev_society_poll_fb_store_v1";
+      const VOTER_KEY = "dev_society_voter_unique_id_fb";
 
       // Load cached store
       function getCachedPollData() {
@@ -1327,30 +1172,29 @@
 
       syncVotedState();
 
-      // Fetch shared JSON from server
-      async function fetchServerPoll() {
+      // Fetch shared data directly from Firebase Realtime Database
+      async function fetchFirebasePoll() {
         try {
-          const res = await fetch(`${API_BASE}/api/poll`, { cache: 'no-store' });
+          const res = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
           if (res.ok) {
             const data = await res.json();
-            if (data && Array.isArray(data.topics)) {
+            if (data && Array.isArray(data.topics) && data.topics.length > 0) {
               pollData = data;
               saveLocalCache(data);
               syncVotedState();
               render();
-              document.getElementById("sync-status-indicator").textContent = "● লাইভ সিংক সক্রিয়";
+              const indicator = document.getElementById("sync-status-indicator");
+              if (indicator) indicator.textContent = "রিয়েল-টাইম ডিবি সক্রিয়";
               return;
             }
           }
         } catch (e) {
-          // offline or network hiccup, fallback to cache
-          console.warn("Server poll sync:", e.message);
-          document.getElementById("sync-status-indicator").textContent = "● লোকাল ক্যাশ সক্রিয়";
+          console.warn("Firebase RTDB sync error:", e);
         }
       }
 
-      // Auto poll every 6 seconds so user A and user B see each other's votes
-      setInterval(fetchServerPoll, 6000);
+      // Auto poll Firebase Realtime Database every 3.5 seconds
+      setInterval(fetchFirebasePoll, 3500);
 
       // Tab Switching
       function switchTab(tab) {
@@ -1454,7 +1298,6 @@
           const isLeading = leadingId === topic.id;
 
           if (showResults) {
-            // Results Progress Bar View
             const card = document.createElement("div");
             card.className = "result-card" + (isUserPick ? " is-user-pick" : "");
 
@@ -1487,7 +1330,6 @@
             `;
             container.appendChild(card);
           } else {
-            // Voting Radio Card View
             const card = document.createElement("div");
             card.className = "option-card" + (isSelected ? " selected" : "");
             card.onclick = () => {
@@ -1608,41 +1450,7 @@
         renderComments();
       }
 
-      // Local fallback in case network offline
-      function applyLocalVote(name, comment) {
-        const topic = pollData.topics.find(t => t.id === selectedTopicId);
-        if (topic) topic.votes = (topic.votes || 0) + 1;
-
-        if (selectedScheduleId) {
-          const schedule = pollData.schedules.find(s => s.id === selectedScheduleId);
-          if (schedule) schedule.votes = (schedule.votes || 0) + 1;
-        }
-
-        pollData.totalVoters = (pollData.totalVoters || 0) + 1;
-        pollData.votesLog.unshift({
-          id: "vote_" + Date.now(),
-          voterId: currentVoterId,
-          voterName: name,
-          selectedTopicId: selectedTopicId,
-          selectedTopicTitle: topic ? topic.title : "",
-          selectedScheduleId: selectedScheduleId,
-          timestamp: new Date().toISOString(),
-          comment: comment || undefined
-        });
-
-        if (comment) {
-          pollData.comments.unshift({
-            id: "comment_" + Date.now(),
-            author: name,
-            text: comment,
-            topic: topic ? topic.title : "",
-            time: "এইমাত্র"
-          });
-        }
-        saveLocalCache(pollData);
-      }
-
-      // Submit Vote (Writes to server JSON file)
+      // Submit Vote Directly to Firebase Realtime Database
       async function submitVote() {
         if (!selectedTopicId) {
           alert("অনুগ্রহ করে একটি অটোমেশন টপিক সিলেক্ট করুন।");
@@ -1659,30 +1467,77 @@
         btn.style.opacity = "0.7";
 
         try {
-          const response = await fetch(`${API_BASE}/api/vote`, {
-            method: 'POST',
+          // Fetch fresh state from Firebase RTDB first
+          const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+          let latest = freshRes.ok ? await freshRes.json() : null;
+          if (!latest || !Array.isArray(latest.topics)) {
+            latest = pollData;
+          }
+
+          // Check if voter already in votesLog
+          if (!latest.votesLog) latest.votesLog = [];
+          const existingIdx = latest.votesLog.findIndex(v => v.voterId === currentVoterId);
+
+          if (existingIdx !== -1) {
+            const prev = latest.votesLog[existingIdx];
+            latest.topics = latest.topics.map(t => t.id === prev.selectedTopicId ? { ...t, votes: Math.max(0, (t.votes || 0) - 1) } : t);
+            if (prev.selectedScheduleId) {
+              latest.schedules = latest.schedules.map(s => s.id === prev.selectedScheduleId ? { ...s, votes: Math.max(0, (s.votes || 0) - 1) } : s);
+            }
+            latest.votesLog.splice(existingIdx, 1);
+          } else {
+            latest.totalVoters = (latest.totalVoters || 0) + 1;
+          }
+
+          // Increment selected
+          const topic = latest.topics.find(t => t.id === selectedTopicId);
+          if (topic) topic.votes = (topic.votes || 0) + 1;
+
+          if (selectedScheduleId) {
+            const sched = latest.schedules.find(s => s.id === selectedScheduleId);
+            if (sched) sched.votes = (sched.votes || 0) + 1;
+          }
+
+          const newVoteEntry = {
+            id: `vote-${Date.now()}`,
+            voterId: currentVoterId,
+            voterName: name,
+            selectedTopicId: selectedTopicId,
+            selectedTopicTitle: topic ? topic.title : selectedTopicId,
+            selectedScheduleId: selectedScheduleId,
+            timestamp: new Date().toISOString(),
+            comment: comment || undefined
+          };
+
+          latest.votesLog.unshift(newVoteEntry);
+
+          if (comment) {
+            if (!latest.comments) latest.comments = [];
+            latest.comments.unshift({
+              id: `comment-${Date.now()}`,
+              author: name,
+              text: comment,
+              topic: topic ? topic.title : selectedTopicId,
+              time: "এইমাত্র"
+            });
+          }
+
+          // Save to Firebase Realtime Database
+          await fetch(FIREBASE_RTDB_ENDPOINT, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              topicId: selectedTopicId,
-              scheduleId: selectedScheduleId,
-              voterName: name,
-              comment: comment,
-              voterId: currentVoterId
-            })
+            body: JSON.stringify(latest)
           });
 
-          if (response.ok) {
-            const result = await response.json();
-            if (result && result.poll) {
-              pollData = result.poll;
-              saveLocalCache(pollData);
-            }
-          } else {
-            applyLocalVote(name, comment);
-          }
+          pollData = latest;
+          saveLocalCache(pollData);
         } catch (err) {
-          console.warn("Post to server failed, saved locally:", err);
-          applyLocalVote(name, comment);
+          console.warn("Firebase direct write issue, local update applied:", err);
+          // Local fallback
+          const topic = pollData.topics.find(t => t.id === selectedTopicId);
+          if (topic) topic.votes = (topic.votes || 0) + 1;
+          pollData.totalVoters = (pollData.totalVoters || 0) + 1;
+          saveLocalCache(pollData);
         }
 
         btn.disabled = false;
@@ -1692,7 +1547,7 @@
         showResults = true;
         render();
         launchConfetti();
-        showToast("আপনার ভোট ও বুকিং poll_store.json-এ সংরক্ষিত হয়েছে!");
+        showToast("আপনার ভোট ফায়ারবেস ক্লাউড ডেটাবেসে সংরক্ষিত হয়েছে!");
       }
 
       // Toggle Preview
@@ -1701,7 +1556,7 @@
         render();
       }
 
-      // Quick Comment Post
+      // Quick Comment Post Directly to Firebase RTDB
       async function postQuickComment() {
         const authorInput = document.getElementById("quick-author-input");
         const commentInput = document.getElementById("quick-comment-input");
@@ -1713,79 +1568,37 @@
           return;
         }
 
+        const newComment = {
+          id: `comment-${Date.now()}`,
+          author: author,
+          text: text,
+          topic: "সাধারণ মতামত",
+          time: "এইমাত্র"
+        };
+
         try {
-          const res = await fetch(`${API_BASE}/api/comment`, {
-            method: 'POST',
+          const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+          let latest = freshRes.ok ? await freshRes.json() : pollData;
+          if (!latest.comments) latest.comments = [];
+          latest.comments.unshift(newComment);
+
+          await fetch(FIREBASE_RTDB_ENDPOINT, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              author: author,
-              text: text,
-              topic: "সাধারণ মতামত"
-            })
+            body: JSON.stringify(latest)
           });
 
-          if (res.ok) {
-            const result = await res.json();
-            if (result && result.poll) {
-              pollData = result.poll;
-              saveLocalCache(pollData);
-            }
-          } else {
-            pollData.comments.unshift({
-              id: "comment_" + Date.now(),
-              author: author,
-              text: text,
-              topic: "সাধারণ মতামত",
-              time: "এইমাত্র"
-            });
-            saveLocalCache(pollData);
-          }
+          pollData = latest;
+          saveLocalCache(pollData);
         } catch (e) {
-          pollData.comments.unshift({
-            id: "comment_" + Date.now(),
-            author: author,
-            text: text,
-            topic: "সাধারণ মতামত",
-            time: "এইমাত্র"
-          });
+          if (!pollData.comments) pollData.comments = [];
+          pollData.comments.unshift(newComment);
           saveLocalCache(pollData);
         }
 
         commentInput.value = "";
         render();
-        showToast("মতামত poll_store.json-এ সেভ করা হয়েছে!");
-      }
-
-      // JSON Modal Functions
-      function openJsonModal() {
-        const modal = document.getElementById("json-modal");
-        const content = document.getElementById("json-modal-content");
-        content.textContent = JSON.stringify(pollData, null, 2);
-        modal.classList.add("open");
-      }
-
-      function closeJsonModal() {
-        document.getElementById("json-modal").classList.remove("open");
-      }
-
-      function copyJsonData() {
-        const jsonStr = JSON.stringify(pollData, null, 2);
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(jsonStr).then(() => {
-            showToast("সম্পূর্ণ JSON ক্লিপবোর্ডে কপি হয়েছে!");
-          });
-        }
-      }
-
-      function downloadJsonFile() {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(pollData, null, 2));
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", "poll_store.json");
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
-        showToast("poll_store.json ফাইল ডাউনলোড শুরু হয়েছে!");
+        showToast("মতামত ফায়ারবেস ডেটাবেসে যোগ হয়েছে!");
       }
 
       // Share Link
@@ -1809,7 +1622,7 @@
 
       // Initial Fetch & Render
       render();
-      fetchServerPoll();
+      fetchFirebasePoll();
     </script>
   </body>
 </html>
