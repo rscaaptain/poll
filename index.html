@@ -44,6 +44,7 @@
         background-color: var(--canvas-bg);
         color: var(--text-primary);
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
 
       body {
@@ -53,6 +54,7 @@
         background-color: var(--canvas-bg);
         background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
         background-size: 24px 24px;
+        overflow-x: hidden;
       }
 
       ::selection {
@@ -60,23 +62,35 @@
         color: var(--brand-dark);
       }
 
-      /* HEADER & NAVIGATION */
+      /* HEADER & NAVIGATION - MOBILE FIRST & BULLETPROOF */
       .app-header {
         position: sticky;
         top: 0;
-        z-index: 50;
-        background-color: rgba(255, 255, 255, 0.95);
+        z-index: 100;
+        background-color: rgba(255, 255, 255, 0.96);
         backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border-subtle);
+        width: 100%;
       }
 
       .header-inner {
         max-width: 1440px;
         margin: 0 auto;
-        padding: 12px 20px;
+        padding: 10px 14px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      @media (min-width: 640px) {
+        .header-inner {
+          padding: 12px 20px;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
       }
 
       @media (min-width: 1024px) {
@@ -85,40 +99,90 @@
         }
       }
 
+      .header-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      @media (min-width: 640px) {
+        .header-top-row {
+          width: auto;
+          justify-content: flex-start;
+        }
+      }
+
       .brand-group {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
       }
 
       .brand-icon {
-        width: 38px;
-        height: 38px;
+        width: 32px;
+        height: 32px;
         background: linear-gradient(135deg, #62BD00, #478B00);
         color: #ffffff;
         font-weight: 800;
-        font-size: 14px;
-        border-radius: 10px;
+        font-size: 13px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 2px 8px rgba(98, 189, 0, 0.28);
+        box-shadow: 0 2px 6px rgba(98, 189, 0, 0.28);
         flex-shrink: 0;
       }
 
+      @media (min-width: 640px) {
+        .brand-icon {
+          width: 38px;
+          height: 38px;
+          font-size: 14px;
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(98, 189, 0, 0.28);
+        }
+      }
+
       .brand-title {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 800;
         letter-spacing: -0.02em;
         color: var(--text-primary);
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
+        white-space: nowrap;
+      }
+
+      @media (min-width: 640px) {
+        .brand-title {
+          font-size: 17px;
+          gap: 8px;
+        }
       }
 
       @media (min-width: 1024px) {
         .brand-title {
           font-size: 18px;
+        }
+      }
+
+      .mobile-stats-pill {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 11px;
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--text-muted);
+        background: #F1F5F9;
+        padding: 4px 8px;
+        border-radius: 6px;
+      }
+
+      @media (min-width: 640px) {
+        .mobile-stats-pill {
+          display: none;
         }
       }
 
@@ -155,28 +219,47 @@
       }
 
       .header-tabs {
-        display: flex;
-        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 4px;
         background-color: #F1F5F9;
-        padding: 4px;
+        padding: 3px;
         border-radius: 10px;
         border: 1px solid var(--border-subtle);
+        width: 100%;
+      }
+
+      @media (min-width: 640px) {
+        .header-tabs {
+          display: flex;
+          align-items: center;
+          width: auto;
+          padding: 4px;
+        }
       }
 
       .nav-tab {
         border: none;
         background: transparent;
-        padding: 7px 14px;
+        padding: 8px 10px;
         border-radius: 8px;
-        font-size: 13px;
+        font-size: 12.5px;
         font-weight: 700;
         color: var(--text-muted);
         cursor: pointer;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 6px;
         transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+
+      @media (min-width: 640px) {
+        .nav-tab {
+          padding: 7px 14px;
+          font-size: 13px;
+        }
       }
 
       .nav-tab:hover {
@@ -978,25 +1061,32 @@
     <!-- Top Sticky Navigation -->
     <header class="app-header">
       <div class="header-inner">
-        <div class="brand-group">
-          <div class="brand-icon">DS</div>
-          <div>
-            <div class="brand-title">
-              <span>Developer Society</span>
-              <span class="live-dot" title="রিয়েল-টাইম সংযুক্ত"></span>
+        <div class="header-top-row">
+          <div class="brand-group">
+            <div class="brand-icon">DS</div>
+            <div>
+              <div class="brand-title">
+                <span>Developer Society</span>
+                <span class="live-dot" title="রিয়েল-টাইম সংযুক্ত"></span>
+              </div>
+              <div class="header-meta">
+                <span>লাইভ সেশন পোল</span>
+                <span class="meta-sep">/</span>
+                <span><span id="header-total-views" style="font-weight: 700; color: var(--text-primary);">0</span> ভিউ</span>
+                <span class="meta-sep">/</span>
+                <span id="header-total-votes" style="font-weight: 700; color: var(--text-primary);">0</span>
+                <span>ভোট দিয়েছেন</span>
+              </div>
             </div>
-            <div class="header-meta">
-              <span>লাইভ সেশন পোল</span>
-              <span class="meta-sep">/</span>
-              <span><span id="header-total-views" style="font-weight: 700; color: var(--text-primary);">0</span> ভিউ</span>
-              <span class="meta-sep">/</span>
-              <span id="header-total-votes" style="font-weight: 700; color: var(--text-primary);">0</span>
-              <span>ভোট দিয়েছেন</span>
-            </div>
+          </div>
+
+          <!-- Quick Mobile View/Vote Count -->
+          <div class="mobile-stats-pill">
+            <span id="mobile-views-count">0</span> ভিউ · <span id="mobile-votes-count">0</span> ভোট
           </div>
         </div>
 
-        <!-- Segmented Tab Controls (Zero-pill compliant) -->
+        <!-- Segmented Tab Controls (Responsive Grid on Mobile, Flex on Desktop) -->
         <nav class="header-tabs">
           <button class="nav-tab active" id="tab-poll-btn" onclick="switchTab('poll')">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1011,7 +1101,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <span>মতামত ও রিপ্লাই (<span id="tab-comment-count">0</span>)</span>
+            <span>মতামত (<span id="tab-comment-count">0</span>)</span>
           </button>
         </nav>
       </div>
@@ -1920,9 +2010,13 @@
         const discTotalLikes = document.getElementById("disc-total-likes");
         const pollLikesBadge = document.getElementById("poll-likes-badge");
         const pollLikeIcon = document.getElementById("poll-like-icon");
+        const mobileViewsCount = document.getElementById("mobile-views-count");
+        const mobileVotesCount = document.getElementById("mobile-votes-count");
 
         if (headerTotalVotes) headerTotalVotes.textContent = totalVotes;
         if (headerTotalViews) headerTotalViews.textContent = totalViews;
+        if (mobileViewsCount) mobileViewsCount.textContent = totalViews;
+        if (mobileVotesCount) mobileVotesCount.textContent = totalVotes;
         if (summaryTotalVotes) summaryTotalVotes.textContent = totalVotes;
         if (summaryTotalViews) summaryTotalViews.textContent = totalViews;
         if (summaryTotalLikes) summaryTotalLikes.textContent = totalLikes;
