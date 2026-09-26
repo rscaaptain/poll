@@ -176,10 +176,13 @@ async function startServer() {
     const data = await readPollDataFromFirebase();
     const newComment = {
       id: `comment-${Date.now()}`,
-      author: author?.trim() || 'Dev Member',
+      author: author?.trim() || 'RS CAPTAIn',
       text: text.trim(),
       topic: topic || 'সাধারণ মতামত',
       time: 'এইমাত্র',
+      timestamp: Date.now(),
+      likes: 0,
+      replies: [],
     };
 
     if (!data.comments) data.comments = [];
@@ -187,6 +190,57 @@ async function startServer() {
     await writePollDataToFirebase(data);
 
     res.json({ success: true, comment: newComment, poll: data });
+  });
+
+  // POST /api/comment/reply - Add a reply to a comment
+  app.post('/api/comment/reply', async (req, res) => {
+    const { commentId, author, text } = req.body;
+    if (!commentId || !text || !text.trim()) {
+      return res.status(400).json({ error: 'commentId and text are required' });
+    }
+
+    const data = await readPollDataFromFirebase();
+    if (!data.comments) data.comments = [];
+
+    const parent = data.comments.find((c: any) => c.id === commentId);
+    if (!parent) {
+      return res.status(404).json({ error: 'Comment not found' });
+    }
+
+    if (!parent.replies) parent.replies = [];
+    const newReply = {
+      id: `reply-${Date.now()}`,
+      author: author?.trim() || 'RS CAPTAIn',
+      text: text.trim(),
+      time: 'এইমাত্র',
+      timestamp: Date.now(),
+    };
+
+    parent.replies.push(newReply);
+    await writePollDataToFirebase(data);
+
+    res.json({ success: true, reply: newReply, poll: data });
+  });
+
+  // POST /api/comment/like - Like a comment
+  app.post('/api/comment/like', async (req, res) => {
+    const { commentId } = req.body;
+    if (!commentId) {
+      return res.status(400).json({ error: 'commentId is required' });
+    }
+
+    const data = await readPollDataFromFirebase();
+    if (!data.comments) data.comments = [];
+
+    const comment = data.comments.find((c: any) => c.id === commentId);
+    if (!comment) {
+      return res.status(404).json({ error: 'Comment not found' });
+    }
+
+    comment.likes = (comment.likes || 0) + 1;
+    await writePollDataToFirebase(data);
+
+    res.json({ success: true, likes: comment.likes, poll: data });
   });
 
   // Vite middleware in dev or static files in production

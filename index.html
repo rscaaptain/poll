@@ -136,7 +136,6 @@
         50% { transform: scale(1.4); opacity: 0.5; }
       }
 
-      /* Unboxed Header Metadata */
       .header-meta {
         display: none;
         font-size: 13px;
@@ -270,7 +269,6 @@
         border-color: #CBD5E1;
       }
 
-      /* Kicker & Typography (Zero-pill compliant) */
       .section-kicker {
         font-size: 11px;
         font-weight: 800;
@@ -303,7 +301,6 @@
         line-height: 1.55;
       }
 
-      /* Unboxed Stats Strip in Sidebar */
       .stats-strip {
         display: flex;
         align-items: center;
@@ -328,7 +325,6 @@
         font-family: 'JetBrains Mono', monospace;
       }
 
-      /* Locked Vote Notice (Zero-pill compliant) */
       .voted-notice-card {
         background-color: var(--brand-tint);
         border: 1px solid var(--brand-border);
@@ -375,7 +371,6 @@
         }
       }
 
-      /* Interactive Option Card */
       .option-item {
         border: 1px solid var(--border-subtle);
         background-color: #FFFFFF;
@@ -456,7 +451,6 @@
         line-height: 1.5;
       }
 
-      /* Result Progress Mode Card */
       .result-item {
         border: 1px solid var(--border-subtle);
         background-color: #FFFFFF;
@@ -620,7 +614,7 @@
 
       .app-input {
         width: 100%;
-        padding: 12px 14px;
+        padding: 11px 13px;
         font-size: 13.5px;
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-control);
@@ -628,6 +622,7 @@
         color: var(--text-primary);
         outline: none;
         transition: all 0.2s ease;
+        font-family: inherit;
       }
 
       .app-input:focus {
@@ -646,9 +641,9 @@
         background-color: var(--brand-green);
         color: #FFFFFF;
         border: none;
-        padding: 14px 20px;
+        padding: 13px 20px;
         border-radius: var(--radius-control);
-        font-size: 15px;
+        font-size: 14.5px;
         font-weight: 800;
         cursor: pointer;
         box-shadow: 0 2px 8px rgba(98, 189, 0, 0.3);
@@ -688,25 +683,91 @@
         border-color: var(--border-strong);
       }
 
-      /* FEEDBACK FEED */
-      .comment-box {
+      /* ADVANCED DISCUSSION FEED & THREADED REPLIES */
+      .discussion-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      @media (min-width: 1024px) {
+        .discussion-grid {
+          display: grid;
+          grid-template-columns: 390px 1fr;
+          gap: 24px;
+          align-items: start;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .discussion-grid {
+          grid-template-columns: 420px 1fr;
+          gap: 28px;
+        }
+      }
+
+      .discussion-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      @media (min-width: 1024px) {
+        .discussion-sidebar {
+          position: sticky;
+          top: 80px;
+        }
+      }
+
+      .comment-card {
         background-color: var(--card-bg);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-card);
-        padding: 16px 20px;
-        margin-bottom: 12px;
+        padding: 18px 20px;
+        margin-bottom: 14px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+        transition: border-color 0.2s ease;
       }
 
-      .comment-meta {
+      .comment-card:hover {
+        border-color: #CBD5E1;
+      }
+
+      .comment-top-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .comment-author-badge {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        font-size: 12px;
-        color: var(--text-muted);
-        margin-bottom: 6px;
+        gap: 10px;
       }
 
-      .author-name {
+      .user-avatar-circle {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 13.5px;
+        flex-shrink: 0;
+        border: 1.5px solid transparent;
+      }
+
+      .author-info-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .author-name-text {
+        font-size: 14px;
         font-weight: 700;
         color: var(--text-primary);
         display: flex;
@@ -714,21 +775,136 @@
         gap: 6px;
       }
 
-      .author-avatar {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
+      .comment-time-text {
+        font-size: 11.5px;
+        color: var(--text-muted);
+      }
+
+      .comment-topic-label {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--brand-text);
         background-color: var(--brand-tint);
-        color: var(--brand-dark);
+        border: 1px solid var(--brand-border);
+        padding: 2.5px 8px;
+        border-radius: 6px;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .comment-main-text {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-top: 6px;
+        padding-left: 44px;
+      }
+
+      .comment-actions-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-top: 12px;
+        padding-left: 44px;
+        padding-top: 10px;
+        border-top: 1px solid #F1F5F9;
+      }
+
+      .action-link-btn {
+        background: transparent;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--text-muted);
+        cursor: pointer;
+        padding: 5px 8px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+      }
+
+      .action-link-btn:hover {
+        color: var(--text-primary);
+        background-color: #F8FAFC;
+      }
+
+      .action-link-btn.liked {
+        color: #E11D48;
+      }
+
+      .action-link-btn.liked svg {
+        fill: #E11D48;
+        stroke: #E11D48;
+      }
+
+      .inline-reply-box {
+        margin-top: 12px;
+        margin-left: 44px;
+        background-color: #F8FAFC;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-control);
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        animation: fadeIn 0.2s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .threaded-replies-wrap {
+        margin-top: 14px;
+        margin-left: 22px;
+        padding-left: 22px;
+        border-left: 2px solid #E2E8F0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .reply-bubble {
+        background-color: #F8FAFC;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-control);
+        padding: 10px 14px;
+      }
+
+      .reply-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+
+      .reply-author-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .reply-mini-avatar {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        font-size: 11px;
+        font-weight: 800;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
-        font-weight: 800;
       }
 
-      .comment-body {
-        font-size: 13.5px;
+      .reply-author-name {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+
+      .reply-text-body {
+        font-size: 13px;
         color: var(--text-secondary);
         line-height: 1.5;
         padding-left: 30px;
@@ -821,7 +997,7 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <span>মতামত (<span id="tab-comment-count">0</span>)</span>
+            <span>মতামত ও রিপ্লাই (<span id="tab-comment-count">0</span>)</span>
           </button>
         </nav>
       </div>
@@ -955,28 +1131,88 @@
         </div>
       </div>
 
-      <!-- TAB 2: COMMENTS & FEEDBACK VIEW -->
+      <!-- TAB 2: ADVANCED COMMENTS, THREADED REPLIES & DISCUSSION VIEW -->
       <div id="view-comments" style="display: none;">
-        <div class="app-card" style="max-width: 900px; margin: 0 auto 20px auto;">
-          <span class="section-kicker">কমিউনিটি ডিসকাশন</span>
-          <h2 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">মতামত ও অটোমেশন রিকোয়েস্ট</h2>
-          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
-            যে কোনো আইডিয়া বা পরামর্শ এখানে পোস্ট করতে পারেন।
-          </p>
+        <div class="discussion-grid">
+          <!-- Left Column: Rich Composer & Discussion Metrics -->
+          <aside class="discussion-sidebar">
+            <div class="app-card">
+              <span class="section-kicker">কমিউনিটি ডিসকাশন</span>
+              <h2 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">মতামত বা প্রশ্ন লিখুন</h2>
+              <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+                লাইভ সেশনের যে কোনো টপিক বা অটোমেশন সিস্টেম নিয়ে আপনার চিন্তা বা প্রশ্ন শেয়ার করুন।
+              </p>
 
-          <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--border-subtle);">
-            <input type="text" id="quick-author-input" class="app-input" placeholder="আপনার নাম বা হ্যান্ডেল (যেমন: RS CAPTAIn)" />
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="quick-comment-input" class="app-input" placeholder="অটোমেশন নিয়ে কোনো পরামর্শ লিখুন..." />
-              <button onclick="postQuickComment()" class="btn-submit-main" style="width: auto; padding: 10px 22px; font-size: 13px; flex-shrink: 0;">
-                পোস্ট
-              </button>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div class="field-block" style="margin-bottom: 0;">
+                  <label class="field-label" for="comment-author-input">আপনার নাম / টেলিগ্রাম আইডি</label>
+                  <input type="text" id="comment-author-input" class="app-input" placeholder="যেমন: RS CAPTAIn" />
+                </div>
+
+                <div class="field-block" style="margin-bottom: 0;">
+                  <label class="field-label" for="comment-topic-select">সম্পর্কিত টপিক</label>
+                  <select id="comment-topic-select" class="app-input" style="cursor: pointer;">
+                    <option value="সাধারণ মতামত ও প্রশ্ন">সাধারণ মতামত ও প্রশ্ন</option>
+                    <option value="অটোনোমাস এআই এজেন্ট সেটআপ">অটোনোমাস এআই এজেন্ট সেটআপ</option>
+                    <option value="২৪/৭ এআই কাস্টমার সাপোর্ট ও সেলস">২৪/৭ এআই কাস্টমার সাপোর্ট ও সেলস</option>
+                    <option value="এআই ভিডিও জেন ও অটো-আপলোডার">এআই ভিডিও জেন ও অটো-আপলোডার</option>
+                    <option value="ডেইলি অটো-মেসেজ ও শিডিউলার">ডেইলি অটো-মেসেজ ও শিডিউলার</option>
+                    <option value="৯০% হ্যান্ডস-ফ্রি বিজনেস অটোমেশন">৯০% হ্যান্ডস-ফ্রি বিজনেস অটোমেশন</option>
+                    <option value="এআই ভয়েস কলিং ও টেলিফোনিক সাপোর্ট">এআই ভয়েস কলিং ও টেলিফোনিক সাপোর্ট</option>
+                    <option value="টুর্নামেন্ট ও ডেইলি অপারেশনস এআই">টুর্নামেন্ট ও ডেইলি অপারেশনস এআই</option>
+                    <option value="ভাইরাল ভিডিও রিলস মিডিয়া ইঞ্জিন">ভাইরাল ভিডিও রিলস মিডিয়া ইঞ্জিন</option>
+                  </select>
+                </div>
+
+                <div class="field-block" style="margin-bottom: 0;">
+                  <label class="field-label" for="comment-body-input">আপনার মতামত / জিজ্ঞাসা</label>
+                  <textarea id="comment-body-input" class="app-input" rows="3" placeholder="বিস্তারিত লিখুন... আপনি কী ধরনের অটোমেশন দেখতে চান বা কোনো স্পেসিফিক প্রশ্ন থাকলে লিখুন।" style="resize: vertical; min-height: 85px;"></textarea>
+                </div>
+
+                <button id="btn-post-comment" onclick="postNewComment()" class="btn-submit-main" style="margin-top: 4px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  <span>মতামত পোস্ট করুন</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stats Strip -->
+            <div class="app-card">
+              <div class="stats-strip" style="margin-top: 0; padding-top: 0; border-top: none;">
+                <div class="stat-item">
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট আলোচনা</span>
+                  <strong id="disc-total-comments">0</strong>
+                </div>
+                <div class="stat-item" style="text-align: right;">
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট রিপ্লাই</span>
+                  <strong id="disc-total-replies">0</strong>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Right Column: Discussion Feed with Threaded Replies -->
+          <div class="content-column">
+            <div class="app-card" style="padding: 16px 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <div>
+                  <h3 style="font-size: 16px; font-weight: 800; color: var(--text-primary);">কমিউনিটি ডিসকাশন থ্রেড</h3>
+                  <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">মতামত পড়ুন, লাইক দিন অথবা যে কোনো মতামতে রিপ্লাই করুন</p>
+                </div>
+                <div style="display: flex; gap: 4px; background: #F1F5F9; padding: 3px; border-radius: 8px;">
+                  <button id="sort-recent-btn" onclick="setDiscussionSort('recent')" class="nav-tab active" style="padding: 5px 12px; font-size: 12px;">সর্বশেষ</button>
+                  <button id="sort-top-btn" onclick="setDiscussionSort('top')" class="nav-tab" style="padding: 5px 12px; font-size: 12px;">জনপ্রিয়</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="comments-list">
+              <!-- Dynamic comments & threaded replies rendered via JS -->
             </div>
           </div>
-        </div>
-
-        <div id="comments-list" style="max-width: 900px; margin: 0 auto;">
-          <!-- Dynamic comments rendered via Pure JS -->
         </div>
       </div>
     </main>
@@ -1078,8 +1314,25 @@
         comments: []
       };
 
-      const STORAGE_KEY = "dev_society_poll_fb_store_v2";
+      const STORAGE_KEY = "dev_society_poll_fb_store_v3";
       const VOTER_KEY = "dev_society_voter_unique_id_fb";
+
+      // Avatar Color Palette
+      const AVATAR_PALETTES = [
+        { bg: "#F0FDF4", text: "#166534", border: "#BBF7D0" },
+        { bg: "#EFF6FF", text: "#1E40AF", border: "#BFDBFE" },
+        { bg: "#FAF5FF", text: "#6B21A8", border: "#E9D5FF" },
+        { bg: "#FFF7ED", text: "#9A3412", border: "#FED7AA" },
+        { bg: "#FDF2F8", text: "#9D174D", border: "#FBCFE8" },
+        { bg: "#ECFEFF", text: "#155E75", border: "#A5F3FC" },
+      ];
+
+      function getAvatarPalette(name) {
+        let hash = 0;
+        const str = name || "Dev";
+        for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        return AVATAR_PALETTES[Math.abs(hash) % AVATAR_PALETTES.length];
+      }
 
       function getCachedPollData() {
         try {
@@ -1121,6 +1374,9 @@
       let hasVoted = false;
       let showResults = false;
       let activeTab = "poll";
+      let discussionSort = "recent";
+      const openReplyBoxes = new Set();
+      const likedCommentIds = new Set();
 
       function syncVotedState() {
         if (pollData.votesLog && Array.isArray(pollData.votesLog)) {
@@ -1166,6 +1422,13 @@
         document.getElementById("tab-poll-btn").classList.toggle("active", tab === "poll");
         document.getElementById("tab-comments-btn").classList.toggle("active", tab === "comments");
         render();
+      }
+
+      function setDiscussionSort(sort) {
+        discussionSort = sort;
+        document.getElementById("sort-recent-btn").classList.toggle("active", sort === "recent");
+        document.getElementById("sort-top-btn").classList.toggle("active", sort === "top");
+        renderComments();
       }
 
       function showToast(message) {
@@ -1344,34 +1607,285 @@
         });
       }
 
-      // Render Comments Feed
+      // Toggle inline reply box
+      function toggleReplyBox(commentId) {
+        if (openReplyBoxes.has(commentId)) {
+          openReplyBoxes.delete(commentId);
+        } else {
+          openReplyBoxes.add(commentId);
+        }
+        renderComments();
+      }
+
+      // Like a comment
+      async function likeComment(commentId) {
+        if (!commentId) return;
+
+        const comment = (pollData.comments || []).find(c => c.id === commentId);
+        if (!comment) return;
+
+        const alreadyLiked = likedCommentIds.has(commentId);
+        if (alreadyLiked) {
+          comment.likes = Math.max(0, (comment.likes || 1) - 1);
+          likedCommentIds.delete(commentId);
+        } else {
+          comment.likes = (comment.likes || 0) + 1;
+          likedCommentIds.add(commentId);
+        }
+
+        renderComments();
+
+        // Persist to Firebase Realtime Database
+        try {
+          const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+          let latest = freshRes.ok ? await freshRes.json() : pollData;
+          if (latest && Array.isArray(latest.comments)) {
+            const remoteComment = latest.comments.find(c => c.id === commentId);
+            if (remoteComment) {
+              remoteComment.likes = comment.likes;
+              await fetch(FIREBASE_RTDB_ENDPOINT, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(latest)
+              });
+              pollData = latest;
+              saveLocalCache(pollData);
+            }
+          }
+        } catch (e) {
+          saveLocalCache(pollData);
+        }
+      }
+
+      // Submit reply to a comment
+      async function submitReply(commentId) {
+        const authorInput = document.getElementById(`reply-author-${commentId}`);
+        const textInput = document.getElementById(`reply-text-${commentId}`);
+        if (!textInput) return;
+
+        const author = authorInput && authorInput.value.trim() ? authorInput.value.trim() : "RS CAPTAIn";
+        const text = textInput.value.trim();
+
+        if (!text) {
+          alert("অনুগ্রহ করে আপনার রিপ্লাই লিখুন।");
+          return;
+        }
+
+        const newReply = {
+          id: `reply-${Date.now()}`,
+          author: author,
+          text: text,
+          time: "এইমাত্র",
+          timestamp: Date.now()
+        };
+
+        const targetComment = (pollData.comments || []).find(c => c.id === commentId);
+        if (targetComment) {
+          if (!targetComment.replies) targetComment.replies = [];
+          targetComment.replies.push(newReply);
+        }
+
+        openReplyBoxes.delete(commentId);
+        renderComments();
+        showToast("রিপ্লাই সফলভাবে যোগ হয়েছে!");
+
+        // Persist to Firebase Realtime Database
+        try {
+          const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+          let latest = freshRes.ok ? await freshRes.json() : pollData;
+          if (latest && Array.isArray(latest.comments)) {
+            const remoteComment = latest.comments.find(c => c.id === commentId);
+            if (remoteComment) {
+              if (!remoteComment.replies) remoteComment.replies = [];
+              remoteComment.replies.push(newReply);
+
+              await fetch(FIREBASE_RTDB_ENDPOINT, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(latest)
+              });
+              pollData = latest;
+              saveLocalCache(pollData);
+            }
+          }
+        } catch (e) {
+          saveLocalCache(pollData);
+        }
+      }
+
+      // Post New Root Comment
+      async function postNewComment() {
+        const authorInput = document.getElementById("comment-author-input");
+        const topicSelect = document.getElementById("comment-topic-select");
+        const bodyInput = document.getElementById("comment-body-input");
+
+        const author = authorInput && authorInput.value.trim() ? authorInput.value.trim() : "RS CAPTAIn";
+        const topic = topicSelect ? topicSelect.value : "সাধারণ মতামত ও প্রশ্ন";
+        const text = bodyInput ? bodyInput.value.trim() : "";
+
+        if (!text) {
+          alert("অনুগ্রহ করে আপনার মতামত বা প্রশ্ন লিখুন।");
+          return;
+        }
+
+        const newComment = {
+          id: `comment-${Date.now()}`,
+          author: author,
+          text: text,
+          topic: topic,
+          time: "এইমাত্র",
+          timestamp: Date.now(),
+          likes: 0,
+          replies: []
+        };
+
+        if (!pollData.comments) pollData.comments = [];
+        pollData.comments.unshift(newComment);
+
+        if (bodyInput) bodyInput.value = "";
+        render();
+        showToast("মতামত সফলভাবে যোগ হয়েছে!");
+
+        try {
+          const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
+          let latest = freshRes.ok ? await freshRes.json() : pollData;
+          if (!latest.comments) latest.comments = [];
+          latest.comments.unshift(newComment);
+
+          await fetch(FIREBASE_RTDB_ENDPOINT, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(latest)
+          });
+
+          pollData = latest;
+          saveLocalCache(pollData);
+        } catch (e) {
+          saveLocalCache(pollData);
+        }
+      }
+
+      // Render Comments Feed with Threaded Replies
       function renderComments() {
         const container = document.getElementById("comments-list");
         container.innerHTML = "";
 
-        if (!pollData.comments || pollData.comments.length === 0) {
+        const allComments = pollData.comments || [];
+        const totalReplies = allComments.reduce((acc, c) => acc + (c.replies ? c.replies.length : 0), 0);
+
+        const discTotalComments = document.getElementById("disc-total-comments");
+        const discTotalReplies = document.getElementById("disc-total-replies");
+        if (discTotalComments) discTotalComments.textContent = allComments.length;
+        if (discTotalReplies) discTotalReplies.textContent = totalReplies;
+
+        if (allComments.length === 0) {
           container.innerHTML = `
-            <div style="background: white; border: 1px dashed var(--border-subtle); border-radius: var(--radius-card); padding: 32px 20px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
-              এখনো কোনো মন্তব্য জমা পড়েনি। প্রথম মতামতটি দিন!
+            <div style="background: white; border: 1px dashed var(--border-subtle); border-radius: var(--radius-card); padding: 36px 20px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
+              এখনো কোনো আলোচনা শুরু হয়নি। প্রথম মতামত বা প্রশ্নটি পোস্ট করুন!
             </div>
           `;
           return;
         }
 
-        pollData.comments.forEach(comment => {
+        // Sort comments
+        let displayList = [...allComments];
+        if (discussionSort === "top") {
+          displayList.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+        } else {
+          displayList.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        }
+
+        displayList.forEach(comment => {
           const card = document.createElement("div");
-          card.className = "comment-box";
-          card.innerHTML = `
-            <div class="comment-meta">
-              <div class="author-name">
-                <div class="author-avatar">${(comment.author || "D")[0].toUpperCase()}</div>
-                <span>${escapeHtml(comment.author || "Anonymous")}</span>
+          card.className = "comment-card";
+
+          const palette = getAvatarPalette(comment.author);
+          const authorInitial = (comment.author || "D").trim().charAt(0).toUpperCase();
+          const likesCount = comment.likes || 0;
+          const isLiked = likedCommentIds.has(comment.id);
+          const repliesList = comment.replies || [];
+          const isReplyOpen = openReplyBoxes.has(comment.id);
+
+          // Build nested replies HTML
+          let repliesHtml = "";
+          if (repliesList.length > 0) {
+            repliesHtml += `<div class="threaded-replies-wrap">`;
+            repliesList.forEach(reply => {
+              const repPalette = getAvatarPalette(reply.author);
+              const repInitial = (reply.author || "D").trim().charAt(0).toUpperCase();
+              repliesHtml += `
+                <div class="reply-bubble">
+                  <div class="reply-top-row">
+                    <div class="reply-author-group">
+                      <div class="reply-mini-avatar" style="background-color: ${repPalette.bg}; color: ${repPalette.text}; border: 1px solid ${repPalette.border};">
+                        ${repInitial}
+                      </div>
+                      <span class="reply-author-name">${escapeHtml(reply.author || "RS CAPTAIn")}</span>
+                    </div>
+                    <span style="font-size: 11px; color: var(--text-muted);">${escapeHtml(reply.time || "সম্প্রতি")}</span>
+                  </div>
+                  <p class="reply-text-body">${escapeHtml(reply.text)}</p>
+                </div>
+              `;
+            });
+            repliesHtml += `</div>`;
+          }
+
+          // Build inline reply input HTML
+          let replyBoxHtml = "";
+          if (isReplyOpen) {
+            replyBoxHtml = `
+              <div class="inline-reply-box">
+                <input type="text" id="reply-author-${comment.id}" class="app-input" style="padding: 8px 12px; font-size: 12.5px;" value="RS CAPTAIn" placeholder="আপনার নাম / হ্যান্ডেল" />
+                <textarea id="reply-text-${comment.id}" class="app-input" rows="2" style="padding: 8px 12px; font-size: 13px; resize: vertical;" placeholder="রিপ্লাই লিখুন..."></textarea>
+                <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                  <button onclick="toggleReplyBox('${comment.id}')" class="btn-sub-action" style="width: auto; padding: 6px 12px; font-size: 12px;">বাতিল</button>
+                  <button onclick="submitReply('${comment.id}')" class="btn-submit-main" style="width: auto; padding: 6px 14px; font-size: 12px;">রিপ্লাই পোস্ট করুন</button>
+                </div>
               </div>
-              <span>${escapeHtml(comment.time || "সম্প্রতি")}</span>
+            `;
+          }
+
+          card.innerHTML = `
+            <div class="comment-top-row">
+              <div class="comment-author-badge">
+                <div class="user-avatar-circle" style="background-color: ${palette.bg}; color: ${palette.text}; border-color: ${palette.border};">
+                  ${authorInitial}
+                </div>
+                <div class="author-info-wrap">
+                  <span class="author-name-text">
+                    ${escapeHtml(comment.author || "RS CAPTAIn")}
+                  </span>
+                  <span class="comment-time-text">${escapeHtml(comment.time || "সম্প্রতি")}</span>
+                </div>
+              </div>
+
+              ${comment.topic ? `<span class="comment-topic-label">${escapeHtml(comment.topic)}</span>` : ''}
             </div>
-            <p class="comment-body">${escapeHtml(comment.text)}</p>
-            ${comment.topic ? `<div style="font-size: 11.5px; color: var(--brand-text); font-weight: 700; margin-top: 6px; padding-left: 30px;">টপিক: ${escapeHtml(comment.topic)}</div>` : ''}
+
+            <p class="comment-main-text">${escapeHtml(comment.text)}</p>
+
+            <div class="comment-actions-bar">
+              <button onclick="likeComment('${comment.id}')" class="action-link-btn ${isLiked ? 'liked' : ''}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="${isLiked ? '#E11D48' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <span>${likesCount > 0 ? likesCount : 'লাইক'}</span>
+              </button>
+
+              <button onclick="toggleReplyBox('${comment.id}')" class="action-link-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 17 4 12 9 7"/>
+                  <path d="M20 18v-2a4 4 0 0 0-4-4H4"/>
+                </svg>
+                <span>রিপ্লাই (${repliesList.length})</span>
+              </button>
+            </div>
+
+            ${replyBoxHtml}
+            ${repliesHtml}
           `;
+
           container.appendChild(card);
         });
       }
@@ -1471,7 +1985,10 @@
               author: name,
               text: comment,
               topic: topic ? topic.title : selectedTopicId,
-              time: "এইমাত্র"
+              time: "এইমাত্র",
+              timestamp: Date.now(),
+              likes: 0,
+              replies: []
             });
           }
 
@@ -1504,50 +2021,6 @@
       function toggleResultsPreview() {
         showResults = !showResults;
         render();
-      }
-
-      async function postQuickComment() {
-        const authorInput = document.getElementById("quick-author-input");
-        const commentInput = document.getElementById("quick-comment-input");
-        const author = authorInput.value.trim() || "RS CAPTAIn";
-        const text = commentInput.value.trim();
-
-        if (!text) {
-          alert("অনুগ্রহ করে আপনার মতামত লিখুন।");
-          return;
-        }
-
-        const newComment = {
-          id: `comment-${Date.now()}`,
-          author: author,
-          text: text,
-          topic: "সাধারণ মতামত",
-          time: "এইমাত্র"
-        };
-
-        try {
-          const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
-          let latest = freshRes.ok ? await freshRes.json() : pollData;
-          if (!latest.comments) latest.comments = [];
-          latest.comments.unshift(newComment);
-
-          await fetch(FIREBASE_RTDB_ENDPOINT, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(latest)
-          });
-
-          pollData = latest;
-          saveLocalCache(pollData);
-        } catch (e) {
-          if (!pollData.comments) pollData.comments = [];
-          pollData.comments.unshift(newComment);
-          saveLocalCache(pollData);
-        }
-
-        commentInput.value = "";
-        render();
-        showToast("মতামত সফলভাবে যোগ হয়েছে!");
       }
 
       function sharePoll() {

@@ -1,11 +1,20 @@
 {
+  "comments": [
+    {
+      "author": "Rs Captain",
+      "id": "comment-1790440106236",
+      "text": "test",
+      "time": "এইমাত্র",
+      "topic": "অটোনোমাস এআই এজেন্ট সেটআপ সিস্টেম (Autonomous Multi-Agent AI System)"
+    }
+  ],
   "createdAt": "2026-09-26",
   "pollId": "dev-society-ai-agents-2026",
   "schedules": [
     {
       "id": "fri-9pm",
       "title": "শুক্রবার রাত ৯:০০ টা (Friday 9:00 PM)",
-      "votes": 0
+      "votes": 1
     },
     {
       "id": "sat-830pm",
@@ -26,7 +35,7 @@
       "description": "মানুষের বারবার কমান্ড ছাড়াই নিজে নিজে মার্কেট রিসার্চ, কোড লেখা, ডাটা অ্যানালাইসিস ও সম্পূর্ণ টাস্ক একা সম্পাদনকারী এআই এজেন্ট আর্কিটেকচার।",
       "id": "autonomous-ai-agents",
       "title": "অটোনোমাস এআই এজেন্ট সেটআপ সিস্টেম (Autonomous Multi-Agent AI System)",
-      "votes": 0
+      "votes": 1
     },
     {
       "description": "হোয়াটসঅ্যাপ, মেসেঞ্জার ও ওয়েবসাইটে ক্লায়েন্টের সাথে মানুষের মতো বাংলায় কথা বলে প্রবলেম সলভ, প্রোডাক্ট সেলস ও লিড কনফার্ম করার স্বয়ংক্রিয় এআই সিস্টেম।",
@@ -71,5 +80,17 @@
       "votes": 0
     }
   ],
-  "totalVoters": 0
+  "totalVoters": 1,
+  "votesLog": [
+    {
+      "comment": "test",
+      "id": "vote-1790440106236",
+      "selectedScheduleId": "fri-9pm",
+      "selectedTopicId": "autonomous-ai-agents",
+      "selectedTopicTitle": "অটোনোমাস এআই এজেন্ট সেটআপ সিস্টেম (Autonomous Multi-Agent AI System)",
+      "timestamp": "2026-09-26T16:28:26.236Z",
+      "voterId": "voter_xxubq51_1790440086329",
+      "voterName": "Rs Captain"
+    }
+  ]
 }
