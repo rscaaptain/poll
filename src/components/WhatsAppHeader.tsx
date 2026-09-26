@@ -1,9 +1,9 @@
 import React from 'react';
-import { BarChart3, MessageSquare, Code2, Users, Radio } from 'lucide-react';
+import { BarChart3, MessageSquare, Users, Radio } from 'lucide-react';
 
 interface HeaderProps {
-  activeTab: 'poll' | 'comments' | 'json';
-  setActiveTab: (tab: 'poll' | 'comments' | 'json') => void;
+  activeTab: 'poll' | 'comments';
+  setActiveTab: (tab: 'poll' | 'comments') => void;
   totalVotes: number;
   commentsCount: number;
 }
@@ -47,11 +47,11 @@ export const WhatsAppHeader: React.FC<HeaderProps> = ({
         {/* Live Badge */}
         <div className="flex items-center gap-1.5 rounded-full bg-[#F2FCE8] px-3 py-1 text-xs font-bold text-[#3F7B00] border border-[#62BD00]/30">
           <Radio className="h-3 w-3 text-[#62BD00] animate-pulse" />
-          <span>রিয়েল ডাটা</span>
+          <span>পোল সক্রিয়</span>
         </div>
       </div>
 
-      {/* Navigation Tabs with #62BD00 active indicators */}
+      {/* Navigation Tabs - Exactly TWO tabs: ভোটিং পোল and মতামত */}
       <div className="mx-auto flex max-w-2xl border-t border-slate-100 text-xs sm:text-sm font-semibold">
         <button
           onClick={() => setActiveTab('poll')}
@@ -75,18 +75,6 @@ export const WhatsAppHeader: React.FC<HeaderProps> = ({
         >
           <MessageSquare className={`h-4 w-4 ${activeTab === 'comments' ? 'text-[#62BD00]' : 'text-slate-400'}`} />
           <span>মতামত ({commentsCount})</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('json')}
-          className={`flex-1 flex items-center justify-center gap-2 py-2.5 transition-colors relative cursor-pointer ${
-            activeTab === 'json'
-              ? 'text-slate-900 font-bold border-b-2 border-[#62BD00] bg-[#F2FCE8]/50'
-              : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
-          }`}
-        >
-          <Code2 className={`h-4 w-4 ${activeTab === 'json' ? 'text-[#62BD00]' : 'text-slate-400'}`} />
-          <span>রিয়েল জেসন (JSON)</span>
         </button>
       </div>
     </header>
