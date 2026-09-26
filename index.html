@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>DevSociety Automation & AI Agents Voting Hub</title>
-    <meta name="description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - ফায়ারবেস রিয়েল-টাইম ডেটাবেসে সমস্ত ভোট ও বুকিং সংরক্ষিত হয়।" />
+    <meta name="description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - সম্পূর্ণ রিয়েল-টাইম ক্লাউড ডেটাবেস সিংক।" />
     <meta property="og:title" content="DevSociety Automation & AI Agents Voting Hub" />
-    <meta property="og:description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - ফায়ারবেস রিয়েল-টাইম ডেটাবেসে সমস্ত ভোট ও বুকিং সংরক্ষিত হয়।" />
+    <meta property="og:description" content="অটোনোমাস এআই এজেন্ট ও সাপোর্ট সেটআপ ভোটিং হাব - সম্পূর্ণ রিয়েল-টাইম ক্লাউড ডেটাবেস সিংক।" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,19 +15,20 @@
     <style>
       :root {
         --brand-green: #62BD00;
-        --brand-hover: #54A400;
-        --brand-dark: #274F00;
-        --brand-text: #376C00;
-        --brand-light: #F2FCE8;
-        --brand-light-border: #D6F2AF;
-        --bg-page: #F8FAF6;
-        --bg-card: #FFFFFF;
-        --border-color: #E2E8DF;
+        --brand-hover: #529F00;
+        --brand-dark: #1E3E00;
+        --brand-text: #2F6000;
+        --brand-tint: #F2FCE8;
+        --brand-border: #CFEEA2;
+        --canvas-bg: #F8FAFC;
+        --card-bg: #FFFFFF;
+        --border-subtle: #E2E8F0;
+        --border-strong: #CBD5E1;
         --text-primary: #0F172A;
         --text-secondary: #334155;
         --text-muted: #64748B;
-        --radius-lg: 16px;
-        --radius-md: 12px;
+        --radius-card: 16px;
+        --radius-control: 10px;
       }
 
       * {
@@ -40,7 +41,7 @@
       html {
         scroll-behavior: smooth;
         font-family: 'Plus Jakarta Sans', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background-color: var(--bg-page);
+        background-color: var(--canvas-bg);
         color: var(--text-primary);
         -webkit-font-smoothing: antialiased;
       }
@@ -49,353 +50,391 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        background-color: var(--bg-page);
+        background-color: var(--canvas-bg);
+        background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+        background-size: 24px 24px;
       }
 
       ::selection {
-        background-color: rgba(98, 189, 0, 0.25);
+        background-color: rgba(98, 189, 0, 0.2);
         color: var(--brand-dark);
       }
 
-      /* Header */
+      /* HEADER & NAVIGATION */
       .app-header {
         position: sticky;
         top: 0;
-        z-index: 40;
-        background-color: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border-color);
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+        z-index: 50;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-subtle);
       }
 
-      .header-container {
-        max-width: 680px;
+      .header-inner {
+        max-width: 1440px;
         margin: 0 auto;
-        padding: 12px 16px;
+        padding: 12px 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
-      .brand-box {
+      @media (min-width: 1024px) {
+        .header-inner {
+          padding: 14px 32px;
+        }
+      }
+
+      .brand-group {
         display: flex;
         align-items: center;
         gap: 12px;
       }
 
-      .brand-logo {
-        width: 42px;
-        height: 42px;
-        background: linear-gradient(135deg, #62BD00, #4C9400);
+      .brand-icon {
+        width: 38px;
+        height: 38px;
+        background: linear-gradient(135deg, #62BD00, #478B00);
         color: #ffffff;
         font-weight: 800;
-        font-size: 15px;
-        border-radius: 12px;
+        font-size: 14px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 10px rgba(98, 189, 0, 0.28);
+        box-shadow: 0 2px 8px rgba(98, 189, 0, 0.28);
         flex-shrink: 0;
       }
 
-      .brand-info h1 {
-        font-size: 17px;
+      .brand-title {
+        font-size: 16px;
         font-weight: 800;
         letter-spacing: -0.02em;
         color: var(--text-primary);
-        line-height: 1.2;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
       }
 
-      .pulse-dot {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
+      @media (min-width: 1024px) {
+        .brand-title {
+          font-size: 18px;
+        }
+      }
+
+      .live-dot {
+        width: 7px;
+        height: 7px;
         background-color: var(--brand-green);
         border-radius: 50%;
-        animation: pulse 1.8s infinite;
+        display: inline-block;
+        animation: radar 2s infinite ease-out;
       }
 
-      @keyframes pulse {
+      @keyframes radar {
         0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.35); opacity: 0.6; }
+        50% { transform: scale(1.4); opacity: 0.5; }
       }
 
-      .brand-info p {
-        font-size: 12px;
-        color: var(--text-muted);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 2px;
-      }
-
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .status-pill {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        background-color: var(--brand-light);
-        color: var(--brand-text);
-        border: 1px solid var(--brand-light-border);
-        padding: 5px 12px;
-        border-radius: 9999px;
-        font-size: 12px;
-        font-weight: 700;
-      }
-
-      /* Tabs */
-      .tabs-nav {
-        display: flex;
-        max-width: 680px;
-        margin: 0 auto;
-        border-top: 1px solid #f1f5f9;
-      }
-
-      .tab-btn {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 11px 16px;
+      /* Unboxed Header Metadata */
+      .header-meta {
+        display: none;
         font-size: 13px;
-        font-weight: 700;
         color: var(--text-muted);
-        background: transparent;
-        border: none;
-        border-bottom: 2.5px solid transparent;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .tab-btn:hover {
-        color: var(--text-primary);
-        background-color: #f8fafc;
-      }
-
-      .tab-btn.active {
-        color: var(--text-primary);
-        border-bottom: 2.5px solid var(--brand-green);
-        background-color: var(--brand-light);
-      }
-
-      /* Main container */
-      .main-content {
-        flex: 1;
-        width: 100%;
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 16px 14px 40px 14px;
-      }
-
-      /* Cards */
-      .card {
-        background-color: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: var(--radius-lg);
-        padding: 20px 18px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-        margin-bottom: 14px;
-      }
-
-      .card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #f1f5f9;
-        margin-bottom: 14px;
-      }
-
-      .badge-hub {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background-color: var(--brand-light);
-        color: var(--brand-text);
-        border: 1px solid var(--brand-light-border);
-        padding: 4px 10px;
-        border-radius: 9999px;
-        font-size: 11px;
-        font-weight: 700;
-      }
-
-      .card-title {
-        font-size: 17px;
-        font-weight: 800;
-        color: var(--text-primary);
-        line-height: 1.35;
       }
 
       @media (min-width: 640px) {
-        .card-title {
-          font-size: 19px;
-        }
-      }
-
-      .card-subtitle {
-        font-size: 13px;
-        color: var(--text-secondary);
-        margin-top: 6px;
-        line-height: 1.5;
-      }
-
-      /* Live Sync Indicator Banner */
-      .sync-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 11px;
-        color: var(--brand-text);
-        background: var(--brand-light);
-        border: 1px solid var(--brand-light-border);
-        padding: 3px 8px;
-        border-radius: 6px;
-        font-family: 'JetBrains Mono', monospace;
-      }
-
-      /* Locked Vote Banner */
-      .vote-locked-banner {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        background-color: #F8FAF5;
-        border: 1px solid var(--brand-light-border);
-        padding: 12px 14px;
-        border-radius: var(--radius-md);
-        margin-top: 14px;
-      }
-
-      @media (min-width: 480px) {
-        .vote-locked-banner {
-          flex-direction: row;
+        .header-meta {
+          display: flex;
           align-items: center;
-          justify-content: space-between;
+          gap: 8px;
         }
       }
 
-      .vote-status-text {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--brand-dark);
+      .meta-sep {
+        color: var(--border-strong);
       }
 
-      .btn-locked-action {
-        display: inline-flex;
+      .header-tabs {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        background-color: #F1F5F9;
+        padding: 4px;
+        border-radius: 10px;
+        border: 1px solid var(--border-subtle);
+      }
+
+      .nav-tab {
+        border: none;
+        background: transparent;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: flex;
         align-items: center;
         gap: 6px;
-        background-color: #ffffff;
-        color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        padding: 6px 14px;
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: 700;
-        cursor: not-allowed;
-        text-decoration: none !important;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-        user-select: none;
+        transition: all 0.15s ease;
       }
 
-      /* Option Items */
-      .question-label {
+      .nav-tab:hover {
+        color: var(--text-primary);
+      }
+
+      .nav-tab.active {
+        background-color: #FFFFFF;
+        color: var(--text-primary);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      /* MAIN LAYOUT: RESPONSIVE DUAL-COLUMN ON DESKTOP */
+      .page-container {
+        flex: 1;
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 16px 14px 48px 14px;
+      }
+
+      @media (min-width: 1024px) {
+        .page-container {
+          padding: 24px 32px 64px 32px;
+        }
+      }
+
+      /* Desktop Grid System */
+      .desktop-split-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      @media (min-width: 1024px) {
+        .desktop-split-layout {
+          display: grid;
+          grid-template-columns: 390px 1fr;
+          gap: 24px;
+          align-items: start;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .desktop-split-layout {
+          grid-template-columns: 420px 1fr;
+          gap: 28px;
+        }
+      }
+
+      .sidebar-column {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      @media (min-width: 1024px) {
+        .sidebar-column {
+          position: sticky;
+          top: 80px;
+          max-height: calc(100vh - 100px);
+          overflow-y: auto;
+          scrollbar-width: thin;
+        }
+      }
+
+      .content-column {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      /* CARD SYSTEM */
+      .app-card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-card);
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      @media (min-width: 1024px) {
+        .app-card {
+          padding: 24px;
+        }
+      }
+
+      .app-card:hover {
+        border-color: #CBD5E1;
+      }
+
+      /* Kicker & Typography (Zero-pill compliant) */
+      .section-kicker {
         font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.06em;
         color: var(--brand-text);
         font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 4px;
+        display: block;
       }
 
-      .question-title {
-        font-size: 15px;
+      .card-heading {
+        font-size: 18px;
         font-weight: 800;
         color: var(--text-primary);
-        margin-top: 2px;
-        margin-bottom: 14px;
+        line-height: 1.35;
+        letter-spacing: -0.015em;
       }
 
-      @media (min-width: 640px) {
-        .question-title {
-          font-size: 16px;
+      @media (min-width: 1024px) {
+        .card-heading {
+          font-size: 20px;
         }
       }
 
-      .options-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+      .card-description {
+        font-size: 13.5px;
+        color: var(--text-secondary);
+        margin-top: 8px;
+        line-height: 1.55;
       }
 
-      /* Selectable Option Card */
-      .option-card {
-        border: 1px solid var(--border-color);
-        background-color: #ffffff;
-        border-radius: var(--radius-md);
-        padding: 14px 16px;
+      /* Unboxed Stats Strip in Sidebar */
+      .stats-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 14px;
+        margin-top: 14px;
+        border-top: 1px solid #F1F5F9;
+        font-size: 12.5px;
+        color: var(--text-muted);
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .stat-item strong {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--text-primary);
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* Locked Vote Notice (Zero-pill compliant) */
+      .voted-notice-card {
+        background-color: var(--brand-tint);
+        border: 1px solid var(--brand-border);
+        border-radius: var(--radius-control);
+        padding: 12px 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .voted-notice-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--brand-dark);
+      }
+
+      .lock-label {
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--brand-text);
+        cursor: not-allowed;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        user-select: none;
+      }
+
+      /* TOPICS GRID ON DESKTOP: FULL WIDTH 2-COLUMN GRID */
+      .topics-grid-wrap {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      @media (min-width: 768px) {
+        .topics-grid-wrap {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 14px;
+        }
+      }
+
+      /* Interactive Option Card */
+      .option-item {
+        border: 1px solid var(--border-subtle);
+        background-color: #FFFFFF;
+        border-radius: var(--radius-control);
+        padding: 16px;
         display: flex;
         align-items: flex-start;
-        gap: 12px;
+        gap: 14px;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         position: relative;
         overflow: hidden;
       }
 
-      .option-card:hover {
+      .option-item:hover {
         border-color: var(--brand-green);
-        background-color: #fafcf8;
+        background-color: #FAFDF7;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(98, 189, 0, 0.08);
       }
 
-      .option-card.selected {
+      .option-item.selected {
         border-color: var(--brand-green);
-        background-color: var(--brand-light);
+        background-color: var(--brand-tint);
         box-shadow: 0 0 0 1.5px var(--brand-green);
       }
 
-      .radio-circle {
+      .option-radio {
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        border: 2px solid #cbd5e1;
+        border: 2px solid #CBD5E1;
         margin-top: 2px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
         transition: all 0.2s ease;
-        background-color: #ffffff;
+        background-color: #FFFFFF;
       }
 
-      .option-card.selected .radio-circle {
+      .option-item.selected .option-radio {
         border-color: var(--brand-green);
         background-color: var(--brand-green);
       }
 
-      .radio-dot {
+      .radio-core {
         width: 7px;
         height: 7px;
-        background-color: #ffffff;
+        background-color: #FFFFFF;
         border-radius: 50%;
         display: none;
       }
 
-      .option-card.selected .radio-dot {
+      .option-item.selected .radio-core {
         display: block;
       }
 
-      .option-content {
+      .option-text-group {
         flex: 1;
       }
 
@@ -406,75 +445,88 @@
         line-height: 1.4;
       }
 
-      .option-card.selected .option-title {
+      .option-item.selected .option-title {
         color: var(--brand-dark);
       }
 
       .option-desc {
-        font-size: 12px;
+        font-size: 12.5px;
         color: var(--text-muted);
-        margin-top: 4px;
-        line-height: 1.45;
+        margin-top: 5px;
+        line-height: 1.5;
       }
 
-      /* Result Progress Bar Card */
-      .result-card {
-        border: 1px solid var(--border-color);
-        background-color: #ffffff;
-        border-radius: var(--radius-md);
-        padding: 14px 16px;
+      /* Result Progress Mode Card */
+      .result-item {
+        border: 1px solid var(--border-subtle);
+        background-color: #FFFFFF;
+        border-radius: var(--radius-control);
+        padding: 16px;
         position: relative;
         overflow: hidden;
-        margin-bottom: 10px;
-        transition: all 0.3s ease;
+        transition: all 0.25s ease;
       }
 
-      .result-card.is-user-pick {
+      .result-item.user-vote {
         border-color: var(--brand-green);
         box-shadow: 0 0 0 1.5px var(--brand-green);
-        background-color: #FBFDF9;
+        background-color: #FAFDF7;
       }
 
-      .progress-bg {
+      .progress-wash {
         position: absolute;
         top: 0;
         bottom: 0;
         left: 0;
-        background-color: var(--brand-light);
+        background-color: var(--brand-tint);
         opacity: 0.95;
-        transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         z-index: 1;
       }
 
-      .result-inner {
+      .result-content {
         position: relative;
         z-index: 2;
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 8px;
       }
 
-      .result-top {
+      .result-header-row {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
         gap: 12px;
       }
 
-      .result-left {
+      .result-title-group {
         display: flex;
         align-items: flex-start;
         gap: 10px;
       }
 
-      .result-stats {
+      .result-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.4;
+      }
+
+      .result-sub-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--brand-text);
+        margin-top: 2px;
+      }
+
+      .result-numbers {
         text-align: right;
         flex-shrink: 0;
         font-family: 'JetBrains Mono', monospace;
       }
 
-      .result-percent {
-        font-size: 16px;
+      .result-percentage {
+        font-size: 17px;
         font-weight: 800;
         color: var(--text-primary);
       }
@@ -484,90 +536,67 @@
         color: var(--text-muted);
       }
 
-      .progress-bar-wrap {
-        height: 7px;
+      .progress-track {
+        height: 6px;
         width: 100%;
-        background-color: #e2e8f0;
+        background-color: #E2E8F0;
         border-radius: 9999px;
         overflow: hidden;
-        margin-top: 5px;
       }
 
-      .progress-bar-fill {
+      .progress-fill {
         height: 100%;
         background-color: var(--brand-green);
         border-radius: 9999px;
-        transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
-      .badge-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 2px 7px;
-        border-radius: 6px;
-        font-size: 10.5px;
-        font-weight: 800;
-      }
-
-      .badge-your-vote {
-        background-color: var(--brand-green);
-        color: #ffffff;
-      }
-
-      .badge-leader {
-        background-color: var(--brand-light);
-        color: var(--brand-text);
-        border: 1px solid var(--brand-light-border);
-      }
-
-      /* Schedules Grid */
-      .schedules-grid {
+      /* SCHEDULES GRID */
+      .schedule-grid-wrap {
         display: grid;
         grid-template-columns: 1fr;
         gap: 10px;
       }
 
       @media (min-width: 640px) {
-        .schedules-grid {
+        .schedule-grid-wrap {
           grid-template-columns: repeat(3, 1fr);
         }
       }
 
-      .schedule-btn {
-        border: 1px solid var(--border-color);
-        background-color: #ffffff;
-        border-radius: var(--radius-md);
-        padding: 12px 14px;
-        text-align: left;
+      .schedule-card {
+        border: 1px solid var(--border-subtle);
+        background-color: #FFFFFF;
+        border-radius: var(--radius-control);
+        padding: 14px 16px;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.15s ease;
         position: relative;
         overflow: hidden;
       }
 
-      .schedule-btn:hover {
+      .schedule-card:hover {
         border-color: var(--brand-green);
-        background-color: #fafcf8;
+        background-color: #FAFDF7;
       }
 
-      .schedule-btn.selected {
+      .schedule-card.selected {
         border-color: var(--brand-green);
-        background-color: var(--brand-light);
+        background-color: var(--brand-tint);
         box-shadow: 0 0 0 1.5px var(--brand-green);
       }
 
-      .schedule-title {
-        font-size: 13px;
+      .schedule-name {
+        font-size: 13.5px;
         font-weight: 700;
         color: var(--text-primary);
         position: relative;
         z-index: 2;
       }
 
-      .schedule-percent {
+      .schedule-stat {
         font-size: 12px;
-        font-weight: 800;
+        font-weight: 700;
         color: var(--brand-text);
         font-family: 'JetBrains Mono', monospace;
         margin-top: 4px;
@@ -575,130 +604,100 @@
         z-index: 2;
       }
 
-      /* Inputs */
-      .input-group {
+      /* FORM INPUTS */
+      .field-block {
         display: flex;
         flex-direction: column;
         gap: 6px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
       }
 
-      .input-label {
-        font-size: 12px;
+      .field-label {
+        font-size: 12.5px;
         font-weight: 600;
         color: var(--text-secondary);
       }
 
-      .text-input {
+      .app-input {
         width: 100%;
-        padding: 11px 14px;
-        font-size: 13px;
-        border: 1px solid var(--border-color);
-        border-radius: 10px;
-        background-color: #f8fafc;
+        padding: 12px 14px;
+        font-size: 13.5px;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-control);
+        background-color: #F8FAFC;
         color: var(--text-primary);
         outline: none;
         transition: all 0.2s ease;
       }
 
-      .text-input:focus {
+      .app-input:focus {
         border-color: var(--brand-green);
-        background-color: #ffffff;
+        background-color: #FFFFFF;
         box-shadow: 0 0 0 2px rgba(98, 189, 0, 0.15);
       }
 
-      /* Buttons */
-      .actions-row {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 14px;
-      }
-
-      @media (min-width: 640px) {
-        .actions-row {
-          flex-direction: row;
-        }
-      }
-
-      .btn-primary {
-        flex: 1;
+      /* BUTTONS */
+      .btn-submit-main {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         background-color: var(--brand-green);
-        color: #ffffff;
+        color: #FFFFFF;
         border: none;
         padding: 14px 20px;
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-control);
         font-size: 15px;
         font-weight: 800;
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(98, 189, 0, 0.25);
+        box-shadow: 0 2px 8px rgba(98, 189, 0, 0.3);
         transition: all 0.2s ease;
       }
 
-      .btn-primary:hover {
+      .btn-submit-main:hover {
         background-color: var(--brand-hover);
         transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(98, 189, 0, 0.35);
       }
 
-      .btn-primary:active {
+      .btn-submit-main:active {
         transform: translateY(0);
       }
 
-      .btn-secondary {
+      .btn-sub-action {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
-        background-color: #ffffff;
+        background-color: #FFFFFF;
         color: var(--text-secondary);
-        border: 1px solid var(--border-color);
-        padding: 12px 18px;
-        border-radius: var(--radius-md);
+        border: 1px solid var(--border-subtle);
+        padding: 11px 16px;
+        border-radius: var(--radius-control);
         font-size: 13px;
         font-weight: 700;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.15s ease;
       }
 
-      .btn-secondary:hover {
-        background-color: #f8fafc;
+      .btn-sub-action:hover {
+        background-color: #F8FAFC;
         color: var(--text-primary);
+        border-color: var(--border-strong);
       }
 
-      .btn-share {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        background-color: var(--brand-light);
-        color: var(--brand-dark);
-        border: 1px solid var(--brand-light-border);
-        padding: 12px 18px;
-        border-radius: var(--radius-md);
-        font-size: 13px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
+      /* FEEDBACK FEED */
+      .comment-box {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-card);
+        padding: 16px 20px;
+        margin-bottom: 12px;
       }
 
-      .btn-share:hover {
-        background-color: #e6f9cd;
-      }
-
-      /* Comments Feed */
-      .comment-card {
-        background-color: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 14px;
-        padding: 14px 16px;
-        margin-bottom: 10px;
-      }
-
-      .comment-header {
+      .comment-meta {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -707,7 +706,7 @@
         margin-bottom: 6px;
       }
 
-      .comment-author {
+      .author-name {
         font-weight: 700;
         color: var(--text-primary);
         display: flex;
@@ -715,11 +714,11 @@
         gap: 6px;
       }
 
-      .comment-avatar {
-        width: 22px;
-        height: 22px;
+      .author-avatar {
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
-        background-color: var(--brand-light);
+        background-color: var(--brand-tint);
         color: var(--brand-dark);
         display: flex;
         align-items: center;
@@ -728,35 +727,22 @@
         font-weight: 800;
       }
 
-      .comment-text {
-        font-size: 13px;
+      .comment-body {
+        font-size: 13.5px;
         color: var(--text-secondary);
         line-height: 1.5;
-        padding-left: 28px;
+        padding-left: 30px;
       }
 
-      .comment-tag {
-        display: inline-block;
-        margin-top: 6px;
-        margin-left: 28px;
-        background-color: var(--brand-light);
-        border: 1px solid var(--brand-light-border);
-        color: var(--brand-dark);
-        font-size: 10px;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 6px;
-      }
-
-      /* Toast Notification */
+      /* TOAST */
       .toast {
         position: fixed;
         bottom: 24px;
         left: 50%;
         transform: translateX(-50%);
-        background-color: #0f172a;
-        color: #ffffff;
-        padding: 10px 20px;
+        background-color: #0F172A;
+        color: #FFFFFF;
+        padding: 10px 22px;
         border-radius: 9999px;
         font-size: 13px;
         font-weight: 600;
@@ -768,7 +754,7 @@
         border: 1px solid rgba(98, 189, 0, 0.4);
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.25s ease, transform 0.25s ease;
+        transition: opacity 0.2s ease, transform 0.2s ease;
       }
 
       .toast.visible {
@@ -777,7 +763,6 @@
         transform: translateX(-50%) translateY(-4px);
       }
 
-      /* Confetti Canvas */
       #confetti-canvas {
         position: fixed;
         top: 0;
@@ -788,226 +773,210 @@
         z-index: 999;
       }
 
-      /* Footer */
       .app-footer {
         margin-top: auto;
-        padding: 20px 16px;
+        padding: 24px 20px;
         text-align: center;
-        font-size: 12px;
+        font-size: 12.5px;
         color: var(--text-muted);
-        border-top: 1px solid var(--border-color);
-        background-color: #ffffff;
+        border-top: 1px solid var(--border-subtle);
+        background-color: #FFFFFF;
       }
     </style>
   </head>
   <body>
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- Top Bar -->
+    <!-- Top Sticky Navigation -->
     <header class="app-header">
-      <div class="header-container">
-        <div class="brand-box">
-          <div class="brand-logo">DS</div>
-          <div class="brand-info">
-            <h1>
-              Developer Society
-              <span class="pulse-dot"></span>
-            </h1>
-            <p>
-              <span>Live Shared Poll</span>
-              <span>•</span>
-              <strong id="header-total-votes" style="color: var(--text-primary); font-family: monospace;">0</strong> জন ভোট দিয়েছেন
-            </p>
-          </div>
-        </div>
-
-        <div class="header-actions">
-          <div class="status-pill">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/>
-              <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/>
-              <circle cx="12" cy="12" r="2"/>
-              <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
-              <path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>
-            </svg>
-            <span id="sync-status-indicator">রিয়েল-টাইম ডিবি সক্রিয়</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Exactly Two Tabs: ভোটিং পোল and মতামত -->
-      <nav class="tabs-nav">
-        <button class="tab-btn active" id="tab-poll-btn" onclick="switchTab('poll')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="20" x2="18" y2="10"/>
-            <line x1="12" y1="20" x2="12" y2="4"/>
-            <line x1="6" y1="20" x2="6" y2="14"/>
-          </svg>
-          <span>ভোটিং পোল (<span id="tab-vote-count">0</span>)</span>
-        </button>
-
-        <button class="tab-btn" id="tab-comments-btn" onclick="switchTab('comments')">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          <span>মতামত (<span id="tab-comment-count">0</span>)</span>
-        </button>
-      </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- TAB 1: VOTING POLL -->
-      <div id="view-poll">
-        <!-- Overview Card -->
-        <div class="card">
-          <div class="card-header">
-            <span class="badge-hub">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
-              </svg>
-              অফিশিয়াল কমিউনিটি পোল
-            </span>
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span class="sync-badge">● ফায়ারবেস ক্লাউড ডিবি</span>
-              <span style="font-size: 12px; color: var(--text-muted); font-family: monospace;">
-                মোট ভোট: <strong id="summary-total-votes" style="color: var(--text-primary); font-size: 13px;">0</strong> টি
-              </span>
+      <div class="header-inner">
+        <div class="brand-group">
+          <div class="brand-icon">DS</div>
+          <div>
+            <div class="brand-title">
+              <span>Developer Society</span>
+              <span class="live-dot" title="রিয়েল-টাইম সংযুক্ত"></span>
             </div>
-          </div>
-
-          <h2 class="card-title">Autonomous AI Agent Setup & 24/7 AI Support Systems Voting</h2>
-          <p class="card-subtitle">
-            অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন। সমস্ত ভোট সরাসরি ফায়ারবেস ক্লাউড ডেটাবেসে রিয়েল-টাইমে সংরক্ষিত হয়।
-          </p>
-
-          <!-- Vote Status Banner when voted: Clean UI, NO underline, Vote Locked -->
-          <div id="voted-alert" class="vote-locked-banner" style="display: none;">
-            <div class="vote-status-text">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
-              <span>আপনার ভোট ফায়ারবেস ডেটাবেসে সংরক্ষিত হয়েছে! নিচে লাইভ পার্সেন্টেজ দেখুন।</span>
-            </div>
-            <div class="btn-locked-action" onclick="showLockedNotice()" title="ফলাফলের স্বচ্ছতার জন্য ভোট পরিবর্তন অপশন লক করা আছে">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-              </svg>
-              <span>ভোট পরিবর্তন (লকড)</span>
+            <div class="header-meta">
+              <span>লাইভ সেশন পোল</span>
+              <span class="meta-sep">/</span>
+              <span id="header-total-votes" style="font-weight: 700; color: var(--text-primary);">0</span>
+              <span>জন অংশগ্রহণ করেছেন</span>
             </div>
           </div>
         </div>
 
-        <!-- Question 1: AI Agent Topics -->
-        <div class="card">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <div>
-              <span class="question-label">প্রশ্ন ১</span>
-              <h3 class="question-title">কোন অ্যাডভান্সড এআই এজেন্ট বা অটোমেশন সিস্টেমের উপর লাইভ সেশন চান?</h3>
-            </div>
-            <span id="results-pill" style="display: none; font-size: 11px; font-weight: 700; color: var(--brand-text); background-color: var(--brand-light); border: 1px solid var(--brand-light-border); padding: 3px 8px; border-radius: 6px; font-family: monospace;">
-              রিয়েল পার্সেন্টেজ
-            </span>
-          </div>
-
-          <div id="topics-container" class="options-list">
-            <!-- Dynamic Topics -->
-          </div>
-        </div>
-
-        <!-- Question 2: Preferred Time -->
-        <div class="card">
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <div>
-              <span class="question-label">প্রশ্ন ২</span>
-              <h3 class="question-title">কোন দিন এবং কোন সময়ে লাইভ হলে সুবিধা হয়?</h3>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polyline points="12 6 12 12 16 14"/>
-            </svg>
-          </div>
-
-          <div id="schedules-container" class="schedules-grid">
-            <!-- Dynamic Schedules -->
-          </div>
-        </div>
-
-        <!-- Identity & Feedback (if not yet voted) -->
-        <div id="feedback-card" class="card">
-          <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">আপনার পরিচয় ও বুকিং তথ্য (সরাসরি ডেটাবেসে সেভ হবে)</h3>
-          <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
-            <div class="input-group">
-              <label class="input-label" for="voter-name-input">আপনার নাম / টেলিগ্রাম বা ফেসবুক নাম</label>
-              <input type="text" id="voter-name-input" class="text-input" placeholder="যেমন: তানভীর আহমেদ বা @arif_dev" />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="voter-comment-input">অন্য কোনো অটোমেশন আইডিয়া বা পরামর্শ থাকলে লিখুন</label>
-              <input type="text" id="voter-comment-input" class="text-input" placeholder="যেমন: গুগল শিট ও হোয়াটসঅ্যাপ অটো-মেসেজিং দেখতে চাই" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Action Row -->
-        <div class="actions-row">
-          <button id="btn-submit-vote" class="btn-primary" onclick="submitVote()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"/>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-            </svg>
-            <span>ভোট সাবমিট করুন (Submit Vote)</span>
-          </button>
-
-          <button id="btn-toggle-results" class="btn-secondary" onclick="toggleResultsPreview()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Segmented Tab Controls (Zero-pill compliant) -->
+        <nav class="header-tabs">
+          <button class="nav-tab active" id="tab-poll-btn" onclick="switchTab('poll')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="20" x2="18" y2="10"/>
               <line x1="12" y1="20" x2="12" y2="4"/>
               <line x1="6" y1="20" x2="6" y2="14"/>
             </svg>
-            <span id="btn-toggle-results-text">বর্তমান ফলাফল দেখুন</span>
+            <span>পোল (<span id="tab-vote-count">0</span>)</span>
           </button>
 
-          <button class="btn-share" onclick="sharePoll()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="18" cy="5" r="3"/>
-              <circle cx="6" cy="12" r="3"/>
-              <circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          <button class="nav-tab" id="tab-comments-btn" onclick="switchTab('comments')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <span>গ্রুপে শেয়ার</span>
+            <span>মতামত (<span id="tab-comment-count">0</span>)</span>
           </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Responsive Layout -->
+    <main class="page-container">
+      <!-- TAB 1: POLL VIEW -->
+      <div id="view-poll">
+        <div class="desktop-split-layout">
+          <!-- LEFT COLUMN: Overview & Booking Form (Sticky on PC, Native Stack on Mobile) -->
+          <aside class="sidebar-column">
+            <!-- Overview Card -->
+            <div class="app-card">
+              <span class="section-kicker">Autonomous Systems Masterclass</span>
+              <h1 class="card-heading">Autonomous AI Agent Setup & 24/7 AI Support Systems Voting</h1>
+              <p class="card-description">
+                অত্যাধুনিক অটোনোমাস এআই এজেন্ট আর্কিটেকচার, ২৪/৭ এআই কাস্টমার সাপোর্ট সেটআপ এবং বিজনেস অটোমেশনের পরবর্তী লাইভ মাস্টারক্লাসের টপিক নির্বাচনে আপনার ভোট দিন।
+              </p>
+
+              <!-- Real-time Unboxed Stats Strip -->
+              <div class="stats-strip">
+                <div class="stat-item">
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">মোট ভোট</span>
+                  <strong id="summary-total-votes">0</strong>
+                </div>
+                <div class="stat-item" style="text-align: right;">
+                  <span style="font-size: 11px; text-transform: uppercase; font-family: monospace;">টপিক সংখ্যা</span>
+                  <strong>৮টি</strong>
+                </div>
+              </div>
+
+              <!-- Locked Vote Banner when user has voted -->
+              <div id="voted-alert" class="voted-notice-card" style="display: none;">
+                <div class="voted-notice-left">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>আপনার ভোট সফলভাবে সংরক্ষিত হয়েছে</span>
+                </div>
+                <span class="lock-label" onclick="showLockedNotice()" title="ফলাফলের স্বচ্ছতার জন্য ভোট পরিবর্তন লকড">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  <span>লকড</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Booking / Identity Form Card -->
+            <div id="feedback-card" class="app-card">
+              <span class="section-kicker">ভোট ও বুকিং তথ্য</span>
+              <h2 style="font-size: 15px; font-weight: 800; margin-bottom: 14px;">আপনার নাম ও পরামর্শ</h2>
+
+              <div class="field-block">
+                <label class="field-label" for="voter-name-input">আপনার নাম / টেলিগ্রাম বা ফেসবুক নাম</label>
+                <input type="text" id="voter-name-input" class="app-input" placeholder="যেমন: RS CAPTAIn" />
+              </div>
+
+              <div class="field-block">
+                <label class="field-label" for="voter-comment-input">অন্য কোনো অটোমেশন আইডিয়া বা পরামর্শ (ঐচ্ছিক)</label>
+                <input type="text" id="voter-comment-input" class="app-input" placeholder="যেমন: গুগল শিট ও হোয়াটসঅ্যাপ অটো-মেসেজিং দেখতে চাই" />
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+                <button id="btn-submit-vote" class="btn-submit-main" onclick="submitVote()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  <span>ভোট সাবমিট করুন</span>
+                </button>
+
+                <button id="btn-toggle-results" class="btn-sub-action" onclick="toggleResultsPreview()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"/>
+                    <line x1="12" y1="20" x2="12" y2="4"/>
+                    <line x1="6" y1="20" x2="6" y2="14"/>
+                  </svg>
+                  <span id="btn-toggle-results-text">বর্তমান ফলাফল দেখুন</span>
+                </button>
+
+                <button class="btn-sub-action" onclick="sharePoll()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"/>
+                    <circle cx="6" cy="12" r="3"/>
+                    <circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                  </svg>
+                  <span>গ্রুপে লিংক শেয়ার করুন</span>
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- RIGHT COLUMN: Topics 2-Column Grid & Schedule Picker -->
+          <section class="content-column">
+            <!-- Question 1: AI Agent Topics Grid (2-columns on PC, 1-col on Mobile) -->
+            <div class="app-card">
+              <div style="margin-bottom: 16px;">
+                <span class="section-kicker">প্রশ্ন ০১</span>
+                <h2 style="font-size: 16px; font-weight: 800; color: var(--text-primary); line-height: 1.4;">
+                  কোন অ্যাডভান্সড এআই এজেন্ট বা অটোমেশন সিস্টেমের উপর লাইভ সেশন চান?
+                </h2>
+              </div>
+
+              <!-- Full Horizontal Grid on PC -->
+              <div id="topics-container" class="topics-grid-wrap">
+                <!-- Dynamic Topics Rendered via Pure JS -->
+              </div>
+            </div>
+
+            <!-- Question 2: Preferred Live Schedule (3-columns on PC) -->
+            <div class="app-card">
+              <div style="margin-bottom: 16px;">
+                <span class="section-kicker">প্রশ্ন ০২</span>
+                <h2 style="font-size: 16px; font-weight: 800; color: var(--text-primary); line-height: 1.4;">
+                  কোন দিন এবং কোন সময়ে লাইভ হলে সুবিধা হয়?
+                </h2>
+              </div>
+
+              <!-- Schedule Grid -->
+              <div id="schedules-container" class="schedule-grid-wrap">
+                <!-- Dynamic Schedules Rendered via Pure JS -->
+              </div>
+            </div>
+          </section>
         </div>
       </div>
 
-      <!-- TAB 2: COMMENTS / FEEDBACK -->
+      <!-- TAB 2: COMMENTS & FEEDBACK VIEW -->
       <div id="view-comments" style="display: none;">
-        <div class="card">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-            <h3 style="font-size: 16px; font-weight: 800;">কমিউনিটি মতামত ও অটোমেশন রিকোয়েস্ট</h3>
-          </div>
-          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
-            ভোট ও মতামত দেওয়ার সাথে সাথেই ফায়ারবেস ক্লাউড ডেটাবেসে সেভ হয় এবং সবার ফোনে লাইভ দেখা যায়।
+        <div class="app-card" style="max-width: 900px; margin: 0 auto 20px auto;">
+          <span class="section-kicker">কমিউনিটি ডিসকাশন</span>
+          <h2 style="font-size: 17px; font-weight: 800; margin-bottom: 6px;">মতামত ও অটোমেশন রিকোয়েস্ট</h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            যে কোনো আইডিয়া বা পরামর্শ এখানে পোস্ট করতে পারেন।
           </p>
 
-          <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
-            <input type="text" id="quick-author-input" class="text-input" placeholder="আপনার নাম বা হ্যান্ডেল" style="margin-bottom: 2px;" />
+          <div style="display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--border-subtle);">
+            <input type="text" id="quick-author-input" class="app-input" placeholder="আপনার নাম বা হ্যান্ডেল (যেমন: RS CAPTAIn)" />
             <div style="display: flex; gap: 8px;">
-              <input type="text" id="quick-comment-input" class="text-input" placeholder="অটোমেশন নিয়ে কোনো পরামর্শ লিখুন..." />
-              <button onclick="postQuickComment()" class="btn-primary" style="padding: 10px 16px; font-size: 13px; flex: none;">
+              <input type="text" id="quick-comment-input" class="app-input" placeholder="অটোমেশন নিয়ে কোনো পরামর্শ লিখুন..." />
+              <button onclick="postQuickComment()" class="btn-submit-main" style="width: auto; padding: 10px 22px; font-size: 13px; flex-shrink: 0;">
                 পোস্ট
               </button>
             </div>
           </div>
         </div>
 
-        <div id="comments-list">
-          <!-- Dynamic comments -->
+        <div id="comments-list" style="max-width: 900px; margin: 0 auto;">
+          <!-- Dynamic comments rendered via Pure JS -->
         </div>
       </div>
     </main>
@@ -1015,23 +984,19 @@
     <!-- Footer -->
     <footer class="app-footer">
       <p style="font-weight: 700; color: var(--text-secondary);">
-        Developer Society Community • Official Polling Portal
-      </p>
-      <p style="font-size: 11px; margin-top: 4px; font-family: monospace;">
-        Connected to Firebase Realtime Database • Theme #62BD00
+        © 2026 Developer Society. All Rights Reserved.
       </p>
     </footer>
 
     <!-- Toast Notification -->
     <div id="toast" class="toast">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-        <polyline points="22 4 12 14.01 9 11.01"/>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#62BD00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
       </svg>
       <span id="toast-text">ভোট সফলভাবে সংরক্ষিত হয়েছে!</span>
     </div>
 
-    <!-- PURE JAVASCRIPT LOGIC DIRECTLY WITH FIREBASE REALTIME DATABASE -->
+    <!-- PURE JAVASCRIPT LOGIC -->
     <script>
       // Firebase Realtime Database REST Endpoint
       const FIREBASE_RTDB_ENDPOINT = "https://rsverify-76143-default-rtdb.firebaseio.com/poll_data.json";
@@ -1113,10 +1078,9 @@
         comments: []
       };
 
-      const STORAGE_KEY = "dev_society_poll_fb_store_v1";
+      const STORAGE_KEY = "dev_society_poll_fb_store_v2";
       const VOTER_KEY = "dev_society_voter_unique_id_fb";
 
-      // Load cached store
       function getCachedPollData() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
@@ -1183,8 +1147,6 @@
               saveLocalCache(data);
               syncVotedState();
               render();
-              const indicator = document.getElementById("sync-status-indicator");
-              if (indicator) indicator.textContent = "রিয়েল-টাইম ডিবি সক্রিয়";
               return;
             }
           }
@@ -1193,7 +1155,6 @@
         }
       }
 
-      // Auto poll Firebase Realtime Database every 3.5 seconds
       setInterval(fetchFirebasePoll, 3500);
 
       // Tab Switching
@@ -1207,7 +1168,6 @@
         render();
       }
 
-      // Toast Notification
       function showToast(message) {
         const toast = document.getElementById("toast");
         const toastText = document.getElementById("toast-text");
@@ -1281,7 +1241,7 @@
         update();
       }
 
-      // Render Topics
+      // Render Topics (2-column grid on desktop, 1-col on mobile)
       function renderTopics() {
         const container = document.getElementById("topics-container");
         container.innerHTML = "";
@@ -1299,49 +1259,46 @@
 
           if (showResults) {
             const card = document.createElement("div");
-            card.className = "result-card" + (isUserPick ? " is-user-pick" : "");
+            card.className = "result-item" + (isUserPick ? " user-vote" : "");
 
             card.innerHTML = `
-              <div class="progress-bg" style="width: ${percentage}%;"></div>
-              <div class="result-inner">
-                <div class="result-top">
-                  <div class="result-left">
-                    <div style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid ${isUserPick ? '#62BD00' : '#cbd5e1'}; background: ${isUserPick ? '#62BD00' : '#ffffff'}; display: flex; align-items: center; justify-content: center; margin-top: 2px; flex-shrink: 0;">
+              <div class="progress-wash" style="width: ${percentage}%;"></div>
+              <div class="result-content">
+                <div class="result-header-row">
+                  <div class="result-title-group">
+                    <div style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid ${isUserPick ? '#62BD00' : '#CBD5E1'}; background: ${isUserPick ? '#62BD00' : '#FFFFFF'}; display: flex; align-items: center; justify-content: center; margin-top: 2px; flex-shrink: 0;">
                       ${isUserPick ? '<span style="color: white; font-size: 11px; font-weight: 800;">✓</span>' : ''}
                     </div>
                     <div>
-                      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-                        <span style="font-size: 14px; font-weight: 700; color: ${isUserPick ? 'var(--brand-dark)' : 'var(--text-primary)'};">${escapeHtml(topic.title)}</span>
-                        ${isUserPick ? '<span class="badge-tag badge-your-vote">আপনার ভোট</span>' : ''}
-                        ${isLeading ? '<span class="badge-tag badge-leader">সবচেয়ে বেশি ভোট</span>' : ''}
-                      </div>
-                      ${topic.description ? `<p style="font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.45;">${escapeHtml(topic.description)}</p>` : ''}
+                      <div class="result-title" style="color: ${isUserPick ? 'var(--brand-dark)' : 'var(--text-primary)'};">${escapeHtml(topic.title)}</div>
+                      ${isUserPick ? '<div class="result-sub-label">আপনার ভোট</div>' : (isLeading ? '<div class="result-sub-label" style="color: var(--brand-text);">সবচেয়ে বেশি ভোট</div>' : '')}
+                      ${topic.description ? `<p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.45;">${escapeHtml(topic.description)}</p>` : ''}
                     </div>
                   </div>
-                  <div class="result-stats">
-                    <div class="result-percent">${percentage}%</div>
+                  <div class="result-numbers">
+                    <div class="result-percentage">${percentage}%</div>
                     <div class="result-count">${votesCount} ভোট</div>
                   </div>
                 </div>
-                <div class="progress-bar-wrap">
-                  <div class="progress-bar-fill" style="width: ${percentage}%;"></div>
+                <div class="progress-track">
+                  <div class="progress-fill" style="width: ${percentage}%;"></div>
                 </div>
               </div>
             `;
             container.appendChild(card);
           } else {
             const card = document.createElement("div");
-            card.className = "option-card" + (isSelected ? " selected" : "");
+            card.className = "option-item" + (isSelected ? " selected" : "");
             card.onclick = () => {
               selectedTopicId = topic.id;
               render();
             };
 
             card.innerHTML = `
-              <div class="radio-circle">
-                <div class="radio-dot"></div>
+              <div class="option-radio">
+                <div class="radio-core"></div>
               </div>
-              <div class="option-content">
+              <div class="option-text-group">
                 <h4 class="option-title">${escapeHtml(topic.title)}</h4>
                 ${topic.description ? `<p class="option-desc">${escapeHtml(topic.description)}</p>` : ''}
               </div>
@@ -1364,7 +1321,7 @@
           const isSelected = selectedScheduleId === schedule.id;
 
           const btn = document.createElement("div");
-          btn.className = "schedule-btn" + (isSelected ? " selected" : "");
+          btn.className = "schedule-card" + (isSelected ? " selected" : "");
 
           if (!hasVoted) {
             btn.onclick = () => {
@@ -1375,13 +1332,13 @@
 
           let bgProgress = "";
           if (showResults) {
-            bgProgress = `<div style="position: absolute; top:0; bottom:0; left:0; width:${percentage}%; background-color: var(--brand-light); opacity: 0.85; z-index: 1;"></div>`;
+            bgProgress = `<div style="position: absolute; top:0; bottom:0; left:0; width:${percentage}%; background-color: var(--brand-tint); opacity: 0.85; z-index: 1;"></div>`;
           }
 
           btn.innerHTML = `
             ${bgProgress}
-            <div class="schedule-title">${escapeHtml(schedule.title)}</div>
-            ${showResults ? `<div class="schedule-percent">${percentage}% (${votesCount} ভোট)</div>` : ''}
+            <div class="schedule-name">${escapeHtml(schedule.title)}</div>
+            ${showResults ? `<div class="schedule-stat">${percentage}% (${votesCount} ভোট)</div>` : ''}
           `;
           container.appendChild(btn);
         });
@@ -1394,7 +1351,7 @@
 
         if (!pollData.comments || pollData.comments.length === 0) {
           container.innerHTML = `
-            <div style="background: white; border: 1px dashed var(--border-color); border-radius: 12px; padding: 28px; text-align: center; color: var(--text-muted); font-size: 13px;">
+            <div style="background: white; border: 1px dashed var(--border-subtle); border-radius: var(--radius-card); padding: 32px 20px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
               এখনো কোনো মন্তব্য জমা পড়েনি। প্রথম মতামতটি দিন!
             </div>
           `;
@@ -1403,17 +1360,17 @@
 
         pollData.comments.forEach(comment => {
           const card = document.createElement("div");
-          card.className = "comment-card";
+          card.className = "comment-box";
           card.innerHTML = `
-            <div class="comment-header">
-              <div class="comment-author">
-                <div class="comment-avatar">${(comment.author || "D")[0].toUpperCase()}</div>
+            <div class="comment-meta">
+              <div class="author-name">
+                <div class="author-avatar">${(comment.author || "D")[0].toUpperCase()}</div>
                 <span>${escapeHtml(comment.author || "Anonymous")}</span>
               </div>
               <span>${escapeHtml(comment.time || "সম্প্রতি")}</span>
             </div>
-            <p class="comment-text">${escapeHtml(comment.text)}</p>
-            ${comment.topic ? `<span class="comment-tag">ভোট: ${escapeHtml(comment.topic)}</span>` : ''}
+            <p class="comment-body">${escapeHtml(comment.text)}</p>
+            ${comment.topic ? `<div style="font-size: 11.5px; color: var(--brand-text); font-weight: 700; margin-top: 6px; padding-left: 30px;">টপিক: ${escapeHtml(comment.topic)}</div>` : ''}
           `;
           container.appendChild(card);
         });
@@ -1429,7 +1386,6 @@
         document.getElementById("tab-comment-count").textContent = pollData.comments ? pollData.comments.length : 0;
 
         document.getElementById("voted-alert").style.display = hasVoted ? "flex" : "none";
-        document.getElementById("results-pill").style.display = showResults ? "inline-block" : "none";
         document.getElementById("feedback-card").style.display = hasVoted ? "none" : "block";
 
         const btnSubmit = document.getElementById("btn-submit-vote");
@@ -1459,7 +1415,7 @@
 
         const nameInput = document.getElementById("voter-name-input");
         const commentInput = document.getElementById("voter-comment-input");
-        const name = nameInput.value.trim() || "Anonymous Developer";
+        const name = nameInput.value.trim() || "RS CAPTAIn";
         const comment = commentInput.value.trim();
 
         const btn = document.getElementById("btn-submit-vote");
@@ -1467,14 +1423,12 @@
         btn.style.opacity = "0.7";
 
         try {
-          // Fetch fresh state from Firebase RTDB first
           const freshRes = await fetch(FIREBASE_RTDB_ENDPOINT, { cache: 'no-store' });
           let latest = freshRes.ok ? await freshRes.json() : null;
           if (!latest || !Array.isArray(latest.topics)) {
             latest = pollData;
           }
 
-          // Check if voter already in votesLog
           if (!latest.votesLog) latest.votesLog = [];
           const existingIdx = latest.votesLog.findIndex(v => v.voterId === currentVoterId);
 
@@ -1489,7 +1443,6 @@
             latest.totalVoters = (latest.totalVoters || 0) + 1;
           }
 
-          // Increment selected
           const topic = latest.topics.find(t => t.id === selectedTopicId);
           if (topic) topic.votes = (topic.votes || 0) + 1;
 
@@ -1522,7 +1475,6 @@
             });
           }
 
-          // Save to Firebase Realtime Database
           await fetch(FIREBASE_RTDB_ENDPOINT, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -1533,7 +1485,6 @@
           saveLocalCache(pollData);
         } catch (err) {
           console.warn("Firebase direct write issue, local update applied:", err);
-          // Local fallback
           const topic = pollData.topics.find(t => t.id === selectedTopicId);
           if (topic) topic.votes = (topic.votes || 0) + 1;
           pollData.totalVoters = (pollData.totalVoters || 0) + 1;
@@ -1547,20 +1498,18 @@
         showResults = true;
         render();
         launchConfetti();
-        showToast("আপনার ভোট ফায়ারবেস ক্লাউড ডেটাবেসে সংরক্ষিত হয়েছে!");
+        showToast("আপনার ভোট সফলভাবে সংরক্ষিত হয়েছে!");
       }
 
-      // Toggle Preview
       function toggleResultsPreview() {
         showResults = !showResults;
         render();
       }
 
-      // Quick Comment Post Directly to Firebase RTDB
       async function postQuickComment() {
         const authorInput = document.getElementById("quick-author-input");
         const commentInput = document.getElementById("quick-comment-input");
-        const author = authorInput.value.trim() || "Dev Member";
+        const author = authorInput.value.trim() || "RS CAPTAIn";
         const text = commentInput.value.trim();
 
         if (!text) {
@@ -1598,10 +1547,9 @@
 
         commentInput.value = "";
         render();
-        showToast("মতামত ফায়ারবেস ডেটাবেসে যোগ হয়েছে!");
+        showToast("মতামত সফলভাবে যোগ হয়েছে!");
       }
 
-      // Share Link
       function sharePoll() {
         const url = window.location.href;
         if (navigator.clipboard) {
@@ -1620,7 +1568,6 @@
         return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
       }
 
-      // Initial Fetch & Render
       render();
       fetchFirebasePoll();
     </script>
